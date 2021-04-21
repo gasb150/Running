@@ -65,7 +65,7 @@ const completeGame = () => {
             super("PreloadGame");
         }
         preload(){
-            this.load.image("platform", "src/images/platform.png");
+            this.load.image("platform", "platform.png");
      
             // player is a sprite sheet made by 24x48 pixels
             this.load.spritesheet("player", "src/images/player.png", {
@@ -296,7 +296,7 @@ const completeGame = () => {
             }
         }
     };
-    const resize = () =>{
+    function resize(){
         let canvas = document.querySelector("canvas");
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
