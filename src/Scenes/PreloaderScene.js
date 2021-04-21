@@ -102,8 +102,8 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.spritesheet("fire", "fire.png",
       {
-        frameWidth: 32,
-        frameHeight: 58
+        frameWidth: 40,
+        frameHeight: 70
       }
     );
 

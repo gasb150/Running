@@ -2,7 +2,7 @@
 let gameOptions = {
 
   // platform speed range, in pixels per second
-  platformSpeedRange: [300, 300],
+  platformSpeedRange: [100, 150],
 
   // mountain speed, in pixels per second
   mountainSpeed: 80,
@@ -30,7 +30,7 @@ let gameOptions = {
   jumpForce: 400,
 
   // player starting X position
-  playerStartPosition: 200,
+  playerStartPosition: 400,
 
   // consecutive jumps allowed
   jumps: 2,
