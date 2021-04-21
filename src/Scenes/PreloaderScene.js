@@ -74,7 +74,7 @@ export default class PreloaderScene extends Phaser.Scene {
       loadingText.destroy();
       percentText.destroy();
       assetText.destroy();
- 
+
       this.ready();
     }.bind(this));
 
@@ -87,13 +87,44 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('box', '/src/assets/ui/grey_box.png')
     this.load.image('checkedBox', '/src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['/src/assets/TownTheme.mp3']);
+    this.load.image("platform", "platform.png");
+
+
+    this.load.spritesheet("player", "player.png", {
+      frameWidth: 24,
+      frameHeight: 48
+    });
+
+    this.load.spritesheet("coin", "coin.png", {
+      frameWidth: 20,
+      frameHeight: 20
+    });
+
+    this.load.spritesheet("fire", "fire.png",
+      {
+        frameWidth: 40,
+        frameHeight: 70
+      }
+    );
+
+    this.load.spritesheet("mountain", "mountain.png", {
+      frameWidth: 512,
+      frameHeight: 512
+    });
+
   }
 
   ready() {
+    this.scene.start('Title')
     this.readyCount++;
+
     if (this.readyCount === 2) {
       this.scene.start('Title');
     }
   }
- 
+
+  create() {
+
+  }
+
 }
