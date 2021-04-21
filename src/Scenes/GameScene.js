@@ -2,7 +2,7 @@
 let gameOptions = {
 
   // platform speed range, in pixels per second
-  platformSpeedRange: [100, 150],
+  platformSpeedRange: [300, 350],
 
   // mountain speed, in pixels per second
   mountainSpeed: 80,
@@ -124,6 +124,7 @@ export default class GameScene extends Phaser.Scene {
       removeCallback: (coin) => {
         coin.scene.coinPool.add(coin)
       }
+      
     });
 
 
@@ -185,7 +186,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    physics.add.overlap(this.player, this.coinGroup, this.collectStar, null, this);
+    physics.add.overlap(this.player, this.coinGroup, this.collectCoin, null, this);
 
 
     physics.add.overlap(this.player, this.fireGroup, this.touchFire, null, this);
@@ -194,7 +195,10 @@ export default class GameScene extends Phaser.Scene {
     this.input.on('pointerdown', this.jump, this);
     this.input.keyboard.on('keydown-SPACE', this.jump, this);
 
-
+    this.scoreText = add.text(16, 16, 'score: 0', {
+      fontSize: '32px',
+      fill: '#000',
+    });
 
   }
   addMountains() {
@@ -218,8 +222,10 @@ export default class GameScene extends Phaser.Scene {
     })
     return rightmostMountain;
   }
-  collectStar(player, coin) {
+  collectCoin(player, coin) {
+    
     this.tweens.add({
+      
       targets: coin,
       y: coin.y - 100,
       alpha: 0,
@@ -229,11 +235,15 @@ export default class GameScene extends Phaser.Scene {
       onComplete: () => {
         this.coinGroup.killAndHide(coin);
         this.coinGroup.remove(coin);
+        this.score += 10;
+        this.scoreText.setText(`Score: ${this.score}`);
       }
     });
 
 
   }
+
+  
 
   touchFire(player, fire) {
     this.dying = true;
@@ -243,7 +253,14 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.removeCollider(this.platformCollider);
   }
 
+  addScore (platform) {
+    platform.scored = true;
+    this.score += .5;
+    this.scoreText.setText(`Score: ${this.score}`);
+}
+
   addPlatform(platformWidth, posX, posY) {
+  
     this.addedPlatforms++;
     let platform;
     if (this.platformPool.getLength()) {
@@ -316,6 +333,8 @@ export default class GameScene extends Phaser.Scene {
   // the player jumps when on the ground, or once in the air as long as there are jumps
   // left and the first jump was on the ground
   jump() {
+    
+ 
     if ((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
@@ -340,6 +359,8 @@ export default class GameScene extends Phaser.Scene {
     }
     this.player.x = gameOptions.playerStartPosition;
 
+ 
+   
     // recycling platforms
     let minDistance = game.config.width;
     let rightmostPlatformHeight = 0;
@@ -352,6 +373,8 @@ export default class GameScene extends Phaser.Scene {
       if (platform.x < - platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
         this.platformGroup.remove(platform);
+        this.score += 1;
+        this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
 
@@ -361,6 +384,8 @@ export default class GameScene extends Phaser.Scene {
       if (coin.x < - coin.displayWidth / 2) {
         this.coinGroup.killAndHide(coin);
         this.coinGroup.remove(coin);
+        this.score -= 10;
+        this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
 
@@ -368,6 +393,8 @@ export default class GameScene extends Phaser.Scene {
       if (fire.x < - fire.displayWidth / 2) {
         this.fireGroup.killAndHide(fire);
         this.fireGroup.remove(fire);
+        this.score += 5;
+        this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
 
