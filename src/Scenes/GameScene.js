@@ -44,10 +44,10 @@ let gameOptions = {
   //
   waterPercent: 0
 }
-window.onload = () => {
-  resize();
-  window.addEventListener("resize", resize, false);
-}
+// window.onload = () => {
+//   resize();
+//   window.addEventListener("resize", resize, false);
+// }
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -465,7 +465,7 @@ export default class GameScene extends Phaser.Scene {
     //   this.scene.start('Submit', this.score);
     // }
     if (this.player.y > game.config.height) {
-      this.scene.start("Game");
+      this.scene.start("SubmitScore");
     }
     this.player.x = gameOptions.playerStartPosition;
 

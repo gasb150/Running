@@ -11,6 +11,7 @@ import TitleScene from './Scenes/TitleScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Model from './Model'
+import SubmitScore from './Scenes/SubmitScore';
 
 
 class Game extends Phaser.Game {
@@ -19,10 +20,14 @@ class Game extends Phaser.Game {
     const model = new Model();
     this.globals = { model, bgMusic: null }
     this.scene.add('Boot', BootScene);
+    this.scene.add('Over', OverScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Title', TitleScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
+   
+    this.scene.add('SubmitScore', SubmitScore);
+
     this.scene.add('Game', GameScene);
     this.scene.start('Boot');
   }
