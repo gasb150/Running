@@ -86,13 +86,32 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('phaserLogo', '/src/assets/logo.png');
     this.load.image('box', '/src/assets/ui/grey_box.png')
     this.load.image('checkedBox', '/src/assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['/src/assets/TownTheme.mp3']);
+    this.load.audio('bgMusic', ['/src/assets/Sounds/TownTheme.mp3']);
+    this.load.audio('gameMusic', ['assets/Sounds/Game.mp3']);
+    this.load.audio('fire', ['/src/assets/Sounds/fire.wav'])
+    this.load.audio('burning', ['/src/assets/Sounds/burning.wav'])
+    this.load.audio('jump', ['/src/assets/Sounds/jump.wav']);
+    this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image("platform", "platform.png");
+    this.load.image("water", "Spike.png");
+    // this.load.spritesheet("water", 'water.png', {
+    //   frameWidth: 112.6,
+    //   frameHeight: 89.5
+    // })
 
+    this.load.spritesheet("explode", "explode.png", {
+      frameWidth: 341.33,
+      frameHeight: 341.33
+    })
 
-    this.load.spritesheet("player", "player.png", {
-      frameWidth: 24,
-      frameHeight: 48
+    this.load.spritesheet("player", "/src/assets/player.png", {
+      frameWidth: 58.75,
+      frameHeight: 57
+    });
+
+    this.load.spritesheet("playerJump", "/src/assets/player.png", {
+      frameWidth: 58.75,
+      frameHeight: 62.5
     });
 
     this.load.spritesheet("coin", "coin.png", {

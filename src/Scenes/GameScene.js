@@ -2,7 +2,7 @@
 let gameOptions = {
 
   // platform speed range, in pixels per second
-  platformSpeedRange: [300, 350],
+  platformSpeedRange: [300, 300],
 
   // mountain speed, in pixels per second
   mountainSpeed: 80,
@@ -39,29 +39,39 @@ let gameOptions = {
   coinPercent: 25,
 
   // % of probability a fire appears on the platform
-  firePercent: 25
+  firePercent: 25,
+
+  //
+  waterPercent: 0
 }
-
-
-
+window.onload = () => {
+  resize();
+  window.addEventListener("resize", resize, false);
+}
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
   }
 
 
+
   create() {
     const { anims, physics, add } = this;
+    
+    
+    
+  
 
 
     this.score = 0;
+    
 
     this.mountainGroup = this.add.group();
 
     // Creating animations
     anims.create({
       key: 'run',
-      frames: anims.generateFrameNumbers('player', { start: 0, end: 1 }),
+      frames: anims.generateFrameNumbers('player', { start: 5, end: 7 }),
       frameRate: 10,
       repeat: -1,
     });
@@ -71,7 +81,7 @@ export default class GameScene extends Phaser.Scene {
       key: "rotate",
       frames: anims.generateFrameNumbers("coin", {
         start: 0,
-        end: 5
+        end: 4
       }),
       frameRate: 15,
       yoyo: true,
@@ -80,20 +90,60 @@ export default class GameScene extends Phaser.Scene {
 
     anims.create({
       key: 'jump',
-      frames: [{ key: 'player', frame: 0 }],
+      frames: anims.generateFrameNumbers("playerJump", {
+        start: 9,
+        end: 11,
+        repeat: -1
+      }),
       frameRate: 20,
     });
 
     anims.create({
       key: "burn",
       frames: anims.generateFrameNumbers("fire", {
-          start: 0,
-          end: 4
+        start: 0,
+        end: 3
       }),
       frameRate: 15,
       repeat: -1
-  });
+    });
 
+    // anims.create({
+    //   key: "wet",
+    //   frames: anims.generateFrameNumbers("water", {
+    //     start: 0,
+    //     end: 4
+    //   }),
+    //   frameRate: 15,
+    //   repeat: -1
+    // })
+
+    anims.create({
+      key: "explode",
+      frames: anims.generateFrameNames("explode", {
+        start: 0,
+        end: 1
+      }),
+      frameRate: 15,
+      repeat: -1
+
+    });
+
+    anims.create({
+      key: "explodeStrong",
+      frames: anims.generateFrameNames("explode", {
+        start: 0,
+        end: 8
+      }),
+      frameRate: 15,
+      repeat: -1
+
+    });
+
+    this.jumpSound = this.sound.add('jump');
+    this.coinSound = this.sound.add('coin')
+    this.fireSound = this.sound.add('fire', { allowMultiple: true })
+    this.burningSoudns = this.sound.add('burning')
 
 
     // /Platform Group and Pool//
@@ -122,9 +172,10 @@ export default class GameScene extends Phaser.Scene {
 
       // once a coin is removed, it's added to the pool
       removeCallback: (coin) => {
+
         coin.scene.coinPool.add(coin)
       }
-      
+
     });
 
 
@@ -155,6 +206,20 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
+    this.waterGroup = this.add.group({
+
+      removeCallback: (water) => {
+        water.scene.waterPool.add(water)
+      }
+    })
+
+    this.waterPool = this.add.group({
+
+      removeCallback: (water) => {
+        water.scene.waterGroup.add(water)
+      }
+    })
+
 
     // adding a mountain
     this.addMountains()
@@ -178,6 +243,9 @@ export default class GameScene extends Phaser.Scene {
     // the player is not dying
     this.dying = false;
 
+    if (this.dying === true) {
+      this.fireSound.stop()
+    }
 
     // setting collisions between the player and the platform group
     physics.add.collider(this.player, this.platformGroup, () => {
@@ -190,6 +258,7 @@ export default class GameScene extends Phaser.Scene {
 
 
     physics.add.overlap(this.player, this.fireGroup, this.touchFire, null, this);
+    physics.add.overlap(this.player, this.waterGroup, this.touchWater, null, this);
 
     // checking for input
     this.input.on('pointerdown', this.jump, this);
@@ -201,6 +270,10 @@ export default class GameScene extends Phaser.Scene {
     });
 
   }
+
+
+
+  ///////////////////////////////////
   addMountains() {
     let rightmostMountain = this.getRightmostMountain();
     if (rightmostMountain < game.config.width * 2) {
@@ -223,44 +296,46 @@ export default class GameScene extends Phaser.Scene {
     return rightmostMountain;
   }
   collectCoin(player, coin) {
-    
-    this.tweens.add({
-      
-      targets: coin,
-      y: coin.y - 100,
-      alpha: 0,
-      duration: 800,
-      ease: "Cubic.easeOut",
-      callbackScope: this,
-      onComplete: () => {
-        this.coinGroup.killAndHide(coin);
-        this.coinGroup.remove(coin);
-        this.score += 10;
-        this.scoreText.setText(`Score: ${this.score}`);
-      }
-    });
+
+    this.coinSound.play()
+
+
+    this.coinGroup.killAndHide(coin);
+    this.coinGroup.remove(coin);
+    this.score += 10;
+    this.scoreText.setText(`Score: ${this.score}`);
+
+
+
 
 
   }
 
-  
+
 
   touchFire(player, fire) {
     this.dying = true;
     this.player.anims.stop();
+    player.anims.play("explode")
     this.player.setFrame(2);
     this.player.body.setVelocityY(-200);
+    this.burningSoudns.play()
     this.physics.world.removeCollider(this.platformCollider);
   }
 
-  addScore (platform) {
-    platform.scored = true;
-    this.score += .5;
-    this.scoreText.setText(`Score: ${this.score}`);
-}
+  touchWater(player, water) {
+    this.dying = true;
+    this.player.anims.stop();
+    // player.anims.play("explode")
+    this.player.setFrame(2);
+    this.player.body.setVelocityY(-200);
+    // this.burningSoudns.play()
+    this.physics.world.removeCollider(this.platformCollider);
+  }
+
 
   addPlatform(platformWidth, posX, posY) {
-  
+    increaseDifficulty(this.score, this.player)
     this.addedPlatforms++;
     let platform;
     if (this.platformPool.getLength()) {
@@ -275,7 +350,7 @@ export default class GameScene extends Phaser.Scene {
       platform.tileScaleX = 1 / platform.scaleX;
     }
     else {
-      platform = this.add.tileSprite(posX, posY, platformWidth, 32, "platform");
+      platform = this.add.tileSprite(posX, posY, platformWidth, 31, "platform");
       this.physics.add.existing(platform);
       platform.body.setImmovable(true);
       platform.body.setVelocityX(Phaser.Math.Between(gameOptions.platformSpeedRange[0], gameOptions.platformSpeedRange[1]) * -1);
@@ -310,22 +385,56 @@ export default class GameScene extends Phaser.Scene {
       if (Phaser.Math.Between(1, 100) <= gameOptions.firePercent) {
         if (this.firePool.getLength()) {
           let fire = this.firePool.getFirst();
+
           fire.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
           fire.y = posY - 46;
           fire.alpha = 1;
           fire.active = true;
           fire.visible = true;
           this.firePool.remove(fire);
+
         }
         else {
+
           let fire = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "fire");
           fire.setImmovable(true);
           fire.setVelocityX(platform.body.velocity.x);
           fire.setSize(8, 2, true)
-           fire.anims.play("burn");
+          fire.anims.play("burn");
           fire.setDepth(2);
           this.fireGroup.add(fire);
+          this.fireSound.play()
+
         }
+      }
+
+      if (Phaser.Math.Between(1, 100) <= gameOptions.waterPercent) {
+        
+    
+          if (this.waterPool.getLength()) {
+            let water = this.waterPool.getFirst();
+
+            water.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
+            water.y = posY - 46;
+            water.alpha = 1;
+            water.active = true;
+            water.visible = true;
+            this.waterPool.remove(water);
+
+          }
+          else {
+
+            let water = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "water");
+            water.setImmovable(true);
+            water.setVelocityX(platform.body.velocity.x);
+            water.setSize(8, 2, true)
+            // water.anims.play("wet");
+            water.setDepth(2);
+            this.waterGroup.add(water);
+            // this.fireSound.play()
+
+          }
+        
       }
     }
   }
@@ -333,19 +442,20 @@ export default class GameScene extends Phaser.Scene {
   // the player jumps when on the ground, or once in the air as long as there are jumps
   // left and the first jump was on the ground
   jump() {
-    
- 
+
+
     if ((!this.dying) && (this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps))) {
+      this.jumpSound.play()
       if (this.player.body.touching.down) {
         this.playerJumps = 0;
+
       }
       this.player.setVelocityY(gameOptions.jumpForce * -1);
       this.playerJumps++;
-
-      // stops animation
-      this.player.anims.stop();
+      this.player.anims.play('jump');
     }
   }
+
 
 
 
@@ -359,8 +469,8 @@ export default class GameScene extends Phaser.Scene {
     }
     this.player.x = gameOptions.playerStartPosition;
 
- 
-   
+
+
     // recycling platforms
     let minDistance = game.config.width;
     let rightmostPlatformHeight = 0;
@@ -373,7 +483,12 @@ export default class GameScene extends Phaser.Scene {
       if (platform.x < - platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
         this.platformGroup.remove(platform);
+        if (this.score < 300){
         this.score += 1;
+        
+        }else {
+          this.score += 3;
+        }
         this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
@@ -384,17 +499,28 @@ export default class GameScene extends Phaser.Scene {
       if (coin.x < - coin.displayWidth / 2) {
         this.coinGroup.killAndHide(coin);
         this.coinGroup.remove(coin);
-        this.score -= 10;
+        this.score -= 2;
         this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
-
+    //reciclin fire
     this.fireGroup.getChildren().forEach((fire) => {
       if (fire.x < - fire.displayWidth / 2) {
         this.fireGroup.killAndHide(fire);
         this.fireGroup.remove(fire);
         this.score += 5;
         this.scoreText.setText(`Score: ${this.score}`);
+        this.fireSound.stop()
+      }
+    }, this);
+    //reciclin water
+    this.waterGroup.getChildren().forEach((water) => {
+      if (water.x < - water.displayWidth / 2) {
+        this.waterGroup.killAndHide(water);
+        this.waterGroup.remove(water);
+        this.score += 5;
+        this.scoreText.setText(`Score: ${this.score}`);
+        //  this.waterSound.stop()
       }
     }, this);
 
@@ -425,8 +551,49 @@ export default class GameScene extends Phaser.Scene {
 
 
   }
+
+  
 }
+
+const  increaseDifficulty = (score, player) => {
+  console.log(gameOptions.firePercent)
+ if (score >= 1 ){
+  console.log(player.body.velocity)
+ }
+if (score > 3) {
+ 
+  player.setVelocityX (700)
+ 
+  gameOptions.platformSpeedRange = [500, 900]
+  console.log(gameOptions.platformSpeedRange)
+  gameOptions.firePercent = 25 + score/100
+  gameOptions.waterPercent = 40 + score/100
+
+}
+ else  if (score > 1) {
+   
+//   // % of probability a fire appears on the platform
+  
+  gameOptions.firePercent = 25 + score/100
+
+   
+  gameOptions.waterPercent = 40 + score/100
+  } 
+  else {
+
+    gameOptions.platformSpeedRange = [300, 300],
+    gameOptions.firePercent= 25
+
+   
+    gameOptions.waterPercent= 0
+  }
+
+  }
+  
+
+
 const resize = () => {
+
   let canvas = document.querySelector("canvas");
   let windowWidth = window.innerWidth;
   let windowHeight = window.innerHeight;
@@ -437,6 +604,7 @@ const resize = () => {
     canvas.style.height = (windowWidth / gameRatio) + "px";
   }
   else {
+   
     canvas.style.width = (windowHeight * gameRatio) + "px";
     canvas.style.height = windowHeight + "px";
   }
