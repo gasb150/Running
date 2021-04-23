@@ -1,3 +1,4 @@
+import clear from '../module/clear'
 
 let gameOptions = {
 
@@ -56,10 +57,11 @@ export default class GameScene extends Phaser.Scene {
 
 
   create() {
+  
     const { anims, physics, add } = this;
     
     
-    
+    clear("score")
   
 
 

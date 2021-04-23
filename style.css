@@ -1,18 +1,39 @@
-#form {
+
+#container {
     position: absolute;
     top: 410px;
     left: 279px;
-    display: none;
-    width: 242px;
+    /* display: none; */
+    width: 600px;
+ 
   }
  
   #score {
     position: absolute;
     display: flex;
-    width: 400px;
+    width: 800px;
     flex-direction: column;
     top: 10%;
     left: 20%;
+
+
+  }
+
+ 
+  .scoreInfo{
+    font-size: 20px;
+  }
+
+  .leaders{
+    font-size: 35px;
+  }
+
+
+  #leaderBoard{
+    position: relative;
+    top: -300px;
+    font-size: 24px;
+    
   }
 
   input{

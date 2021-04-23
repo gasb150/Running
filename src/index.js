@@ -12,6 +12,7 @@ import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Model from './Model'
 import SubmitScore from './Scenes/SubmitScore';
+import ScoreTable from './Scenes/ScoreTable';
 import OverScene from './Scenes/OverScene'
 
 
@@ -26,7 +27,7 @@ class Game extends Phaser.Game {
     this.scene.add('Title', TitleScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
-   
+    this.scene.add('Score', ScoreTable);
     this.scene.add('SubmitScore', SubmitScore);
 
     this.scene.add('Game', GameScene);
