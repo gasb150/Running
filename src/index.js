@@ -12,6 +12,7 @@ import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
 import Model from './Model'
 import SubmitScore from './Scenes/SubmitScore';
+import OverScene from './Scenes/OverScene'
 
 
 class Game extends Phaser.Game {

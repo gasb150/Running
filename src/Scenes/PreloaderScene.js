@@ -96,6 +96,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image("platform", "platform.png");
     this.load.image("water", "Spike.png");
+    this.load.spritesheet('loadIcon', 'load.png', {
+      frameWidth: 100,
+      frameHeight: 110,
+    });
     // this.load.spritesheet("water", 'water.png', {
     //   frameWidth: 112.6,
     //   frameHeight: 89.5
@@ -136,11 +140,11 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start('Title')
+    this.scene.start('SubmitScore')
     this.readyCount++;
 
     if (this.readyCount === 2) {
-      this.scene.start('Title');
+      this.scene.start('SubmitScore');
     }
   }
 

@@ -1,10 +1,9 @@
-import 'phaser';
-// import Button from '../Objects/Button';
-// import leaderboard from '../leaderboard';
+import Phaser from 'phaser';
+import Button from '../Objects/Button';
+import leaderboard from '../module/leaderboard';
 
 
 export default class OverScene extends Phaser.Scene {
-    
   constructor() {
     super('Over');
   }

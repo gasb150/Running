@@ -12,54 +12,55 @@ export default class SubmitScore extends Phaser.Scene {
   }
 
   create() {
-    let name = '';
 
-    // Creating Loading Animation
-    this.anims.create({
-      key: 'loading',
-      frames: this.anims.generateFrameNumbers('loadIcon', { start: 0, end: 7 }),
-      frameRate: 10,
-      repeat: -1,
+
+    //   let bmd = this.add.bitmapData(400, 50);
+    //   let myInput = this.game.add.sprite(15, 15, bmd);
+
+    //   myInput.canvasInput = new CanvasInput({
+    //     canvas: bmd.canvas,
+    //   });
+    //   myInput.inputEnabled = true;
+    //   myInput.input.useHandCursor = true;
+
+    //   console.log(typeof this.score)
+
+    //   //  Using the Scene Data Plugin we can store data on a Scene level
+
+    //   var text = this.add.text(100, 100, '', { font: '64px Courier', fill: '#00ff00' });
+
+    //   // let player = prompt ("please enter player")
+
+
+
+
+
+
+    this.add.text(280, 100, "Enter your name", {
+      color: '#5d1512', fontFamily: 'Arial', fontSize: '60px ', fontWeight: '900',
+    });
+    const element = document.getElementById('form');
+    element.style.display = 'flex';
+    element.addEventListener('click', (event) => {
+      if (event.target.name === 'submit') {
+        const user = document.getElementById('user');
+        if (user.value !== '') {
+          element.style.display = 'none';
+          var text = this.add.text(100, 100, '', { font: '64px Courier', fill: '#00ff00' });
+          element.style.display = 'none';
+          localStorage.setItem("playerName", user.value)
+          console.log(localStorage.getItem("playerName"))
+          text.setText([
+            'Score: ' + this.score,
+            'Player: ' + localStorage.getItem("playerName")
+          ]);
+          // this.scene.start('Over');
+        }
+      }
     });
 
-
-    const submitInfo = () => {
-      const test = document.createElement('h4');
-      name = document.getElementById('name').value;
-      if (name.length >= 5) {
-        this.character.visible = false;
-        this.loadIcon.visible = true;
-        this.loadIcon.anims.play('loading');
-        const result = leaderboard.addScore(name, this.score);
-        result.then(() => {
-          this.scene.start('Over');
-        }).catch(() => {
-          this.loadIcon.visible = false;
-          this.add.text(250, 200, 'Sorry! Something went wrong :( ', {
-            fontSize: '20px',
-            fill: '#000',
-          });
-        });
-      } else {
-        test.innerText = 'Name is too short';
-        this.add.dom(400, 110, test);
-      }
-    };
-
-    this.add.image(400, 300, 'background');
-    this.character = this.add.image(400, 300, 'character');
-    this.loadIcon = this.add.sprite(400, 300, 'loadIcon');
-    this.loadIcon.visible = false;
-
-    const inputText = document.createElement('input');
-    inputText.type = 'text';
-    inputText.id = 'name';
-    this.add.dom(400, 400, inputText);
-
-    const text = document.createElement('h2');
-    text.innerText = 'Provide your Username press Enter and Wait to Submit';
-    text.id = 'text';
-    this.add.dom(400, 520, text);
-    this.input.keyboard.on('keydown-ENTER', submitInfo, this);
   }
+
+
 }
+

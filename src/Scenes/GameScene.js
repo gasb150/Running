@@ -460,12 +460,9 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    // game over
-    // if (this.player.y > 600) {
-    //   this.scene.start('Submit', this.score);
-    // }
+  
     if (this.player.y > game.config.height) {
-      this.scene.start("SubmitScore");
+      this.scene.start("SubmitScore", this.score);
     }
     this.player.x = gameOptions.playerStartPosition;
 
