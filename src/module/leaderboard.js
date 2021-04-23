@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 const leaderboard = (() => {
   const addScore = (name, score) => {
     const body = JSON.stringify({ user: name, score, });
-    const promiseAddScore = fetch(url, {
+    fetch(url, {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
