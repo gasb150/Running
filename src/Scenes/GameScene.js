@@ -65,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
   
 
 
-    this.score = 0;
+    this.score = 80;
     
 
     this.mountainGroup = this.add.group();
@@ -556,10 +556,8 @@ export default class GameScene extends Phaser.Scene {
 
 const  increaseDifficulty = (score, player) => {
   console.log(gameOptions.firePercent)
- if (score >= 1 ){
-  console.log(player.body.velocity)
- }
-if (score > 3) {
+
+if (score > 300) {
  
   player.setVelocityX (700)
  

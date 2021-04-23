@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import api from '../module/leaderboard';
+import api from '../module/apiScore';
 import Button from '../Objects/Button'
 
 export default class OverScene extends Phaser.Scene {
@@ -18,6 +18,7 @@ export default class OverScene extends Phaser.Scene {
     async function result() {
       const response = await api.getInfo()
     
+      console.log(response)
       
       return response;
     }
