@@ -57,16 +57,16 @@ export default class GameScene extends Phaser.Scene {
 
 
   create() {
-  
+
     const { anims, physics, add } = this;
-    
-    
+
+
     clear("score")
-  
+
 
 
     this.score = 80;
-    
+
 
     this.mountainGroup = this.add.group();
 
@@ -271,6 +271,7 @@ export default class GameScene extends Phaser.Scene {
       fill: '#000',
     });
 
+  
   }
 
 
@@ -411,32 +412,32 @@ export default class GameScene extends Phaser.Scene {
       }
 
       if (Phaser.Math.Between(1, 100) <= gameOptions.waterPercent) {
-        
-    
-          if (this.waterPool.getLength()) {
-            let water = this.waterPool.getFirst();
 
-            water.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
-            water.y = posY - 46;
-            water.alpha = 1;
-            water.active = true;
-            water.visible = true;
-            this.waterPool.remove(water);
 
-          }
-          else {
+        if (this.waterPool.getLength()) {
+          let water = this.waterPool.getFirst();
 
-            let water = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "water");
-            water.setImmovable(true);
-            water.setVelocityX(platform.body.velocity.x);
-            water.setSize(8, 2, true)
-            // water.anims.play("wet");
-            water.setDepth(2);
-            this.waterGroup.add(water);
-            // this.fireSound.play()
+          water.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
+          water.y = posY - 46;
+          water.alpha = 1;
+          water.active = true;
+          water.visible = true;
+          this.waterPool.remove(water);
 
-          }
-        
+        }
+        else {
+
+          let water = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "water");
+          water.setImmovable(true);
+          water.setVelocityX(platform.body.velocity.x);
+          water.setSize(8, 2, true)
+          // water.anims.play("wet");
+          water.setDepth(2);
+          this.waterGroup.add(water);
+          // this.fireSound.play()
+
+        }
+
       }
     }
   }
@@ -462,7 +463,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-  
+
     if (this.player.y > game.config.height) {
       this.scene.start("SubmitScore", this.score);
     }
@@ -482,10 +483,10 @@ export default class GameScene extends Phaser.Scene {
       if (platform.x < - platform.displayWidth / 2) {
         this.platformGroup.killAndHide(platform);
         this.platformGroup.remove(platform);
-        if (this.score < 300){
-        this.score += 1;
-        
-        }else {
+        if (this.score < 300) {
+          this.score += 1;
+
+        } else {
           this.score += 3;
         }
         this.scoreText.setText(`Score: ${this.score}`);
@@ -551,42 +552,42 @@ export default class GameScene extends Phaser.Scene {
 
   }
 
-  
+
 }
 
-const  increaseDifficulty = (score, player) => {
+const increaseDifficulty = (score, player) => {
   console.log(gameOptions.firePercent)
 
-if (score > 300) {
- 
-  player.setVelocityX (700)
- 
-  gameOptions.platformSpeedRange = [500, 900]
-  console.log(gameOptions.platformSpeedRange)
-  gameOptions.firePercent = 25 + score/100
-  gameOptions.waterPercent = 40 + score/100
+  if (score > 300) {
 
-}
- else  if (score > 1) {
-   
-//   // % of probability a fire appears on the platform
-  
-  gameOptions.firePercent = 25 + score/100
+    player.setVelocityX(700)
 
-   
-  gameOptions.waterPercent = 40 + score/100
-  } 
+    gameOptions.platformSpeedRange = [500, 900]
+    console.log(gameOptions.platformSpeedRange)
+    gameOptions.firePercent = 25 + score / 100
+    gameOptions.waterPercent = 40 + score / 100
+
+  }
+  else if (score > 1) {
+
+    //   // % of probability a fire appears on the platform
+
+    gameOptions.firePercent = 25 + score / 100
+
+
+    gameOptions.waterPercent = 40 + score / 100
+  }
   else {
 
     gameOptions.platformSpeedRange = [300, 300],
-    gameOptions.firePercent= 25
+      gameOptions.firePercent = 25
 
-   
-    gameOptions.waterPercent= 0
+
+    gameOptions.waterPercent = 0
   }
 
-  }
-  
+}
+
 
 
 const resize = () => {
@@ -601,7 +602,7 @@ const resize = () => {
     canvas.style.height = (windowWidth / gameRatio) + "px";
   }
   else {
-   
+
     canvas.style.width = (windowHeight * gameRatio) + "px";
     canvas.style.height = windowHeight + "px";
   }

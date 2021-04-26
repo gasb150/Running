@@ -6,7 +6,7 @@ const key = 'wdvUmWbYZ2zk8tMSzwiZ'
 
   
   it('Leaderboard score created correctly.', async () => {
-    const responsr = await fetch(
+    const response = await fetch(
         `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`,
       {
         method: 'POST',
@@ -14,9 +14,9 @@ const key = 'wdvUmWbYZ2zk8tMSzwiZ'
         body: JSON.stringify({ user: 'sam', score: '10' }),
       },
     );
-    const result = await responsr.json();
+    const result = await response.json();
   
-    expect(result.result).toEqual('');
+    expect(result.result).toEqual('Leaderboard score created correctly.');
   });
 
   it('Should return some data', async () => {
@@ -24,5 +24,15 @@ const key = 'wdvUmWbYZ2zk8tMSzwiZ'
       `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`,
     );
     const response = await data.json();
-    expect(response.result[0].user).toEqual('sam');
+    expect(response.result[0].user).not.toBe('')
+ 
+  });
+
+  it('Should have score property', async () => {
+    const data = await fetch(
+      `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`,
+    );
+    const response = await data.json();
+   
+    expect(response.result[0]).toHaveProperty("score")
   });

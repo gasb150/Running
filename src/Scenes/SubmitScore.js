@@ -23,7 +23,7 @@ export default class SubmitScore extends Phaser.Scene {
     const submit = async () => {
 
       const response = await  leaderboard.addScore(player, this.score)
-      console.log(response.status)
+      console.log(response)
       
         console.log(response.status)
         this.scene.start('Over')

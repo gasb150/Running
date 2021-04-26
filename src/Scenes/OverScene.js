@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import 'phaser';
 import api from '../module/apiScore';
 import Button from '../Objects/Button'
 
@@ -12,8 +12,8 @@ export default class OverScene extends Phaser.Scene {
      this.add.text(game.config.width/2.7, 50, 'Game Over', { fontSize: '48px', fill: 'black', fontFamily: 'bold' });
      this.musicButton = this.add.image(game.config.width/3, 150, 'scoreIcon')
 
-     this.gameButton = new Button(this, game.config.width/4 , game.config.height - 80, 'blueButton1', 'blueButton2', 'Re-play', 'Game');
-     this.gameButton = new Button(this, game.config.width/1.3 , game.config.height - 80, 'blueButton1', 'blueButton2', 'Home', 'Title');
+     this.gameButton = new Button(this, game.config.width/4 , game.config.height - 80, 'greenButton1', 'blueButton2', 'Re-play', 'Game');
+     this.gameButton = new Button(this, game.config.width/1.3 , game.config.height - 80, 'greenButton1', 'blueButton2', 'Home', 'Menu');
 
     async function result() {
       const response = await api.getInfo()

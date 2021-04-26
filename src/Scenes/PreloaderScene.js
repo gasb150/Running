@@ -81,9 +81,9 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
 
-    this.load.image('blueButton1', '/src/assets/ui/greenButton1.png');
+    this.load.image('greenButton1', '/src/assets/ui/greenButton1.png');
     
-    this.load.image('blueButton2', '/src/assets/ui/greenButton2.png');
+    this.load.image('greenButton2', '/src/assets/ui/greenButton2.png');
     this.load.image('scoreIcon', '/src/assets/ui/score.png');
     this.load.image('phaserLogo', '/src/assets/logo.png');
     this.load.image('noChekedM', '/src/assets/ui/disableMusic.png')
@@ -91,21 +91,19 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('noChekedS', '/src/assets/ui/disableSounds.png')
     this.load.image('checkedS', '/src/assets/ui/ableSounds.png');
     this.load.audio('bgMusic', ['/src/assets/Sounds/TownTheme.mp3']);
-    this.load.audio('gameMusic', ['assets/Sounds/Game.mp3']);
+
     this.load.audio('fire', ['/src/assets/Sounds/fire.wav'])
     this.load.audio('burning', ['/src/assets/Sounds/burning.wav'])
     this.load.audio('jump', ['/src/assets/Sounds/jump.wav']);
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image("platform", "platform.png");
-    this.load.image("water", "Spike.png");
+    this.load.image("spike", "Spike.png");
     this.load.spritesheet('loadIcon', 'load.png', {
       frameWidth: 100,
       frameHeight: 110,
     });
-    // this.load.spritesheet("water", 'water.png', {
-    //   frameWidth: 112.6,
-    //   frameHeight: 89.5
-    // })
+   
+    
 
     this.load.spritesheet("explode", "explode.png", {
       frameWidth: 341.33,
@@ -142,11 +140,12 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
+    
     this.scene.start('Title')
     this.readyCount++;
 
     if (this.readyCount === 2) {
-      this.scene.start('Title');
+      this.scene.start('Name');
     }
   }
 

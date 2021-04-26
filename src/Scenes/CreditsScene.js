@@ -44,7 +44,7 @@ export default class CreditsScene extends Phaser.Scene {
             delay: 1000,
             onComplete: function() {
                 this.madeByTween.destroy;
-                this.scene.start('Title');
+                this.scene.start('Menu');
 
             }.bind(this)
         })
