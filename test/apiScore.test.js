@@ -35,4 +35,15 @@ const key = 'wdvUmWbYZ2zk8tMSzwiZ'
     const response = await data.json();
    
     expect(response.result[0]).toHaveProperty("score")
-  });
+    })
+    it('Should have user property', async () => {
+      const data = await fetch(
+        `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`,
+      );
+      const response = await data.json();
+     
+      expect(response.result[0]).toHaveProperty("user")
+
+
+
+    });
