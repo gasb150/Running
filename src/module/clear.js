@@ -1,7 +1,7 @@
- const clear = (id) => {
-    let dom = document.getElementById(id)
-    console.log(id)
-    dom.innerHTML = ''
-}
+const clear = (id) => {
+  const dom = document.getElementById(id);
 
-export default clear
+  dom.innerHTML = '';
+};
+
+export default clear;

@@ -8,40 +8,37 @@ import OverScene from '../src/Scenes/OverScene';
 import PreloaderScene from '../src/Scenes/PreloaderScene';
 import SubmitScore from '../src/Scenes/SubmitScore';
 
-import TitleScene from '../src/Scenes/TitleScene'
+import TitleScene from '../src/Scenes/TitleScene';
 
 
+describe('Testing Scenes Constructor', () => {
+  it('Preload scene is a function constructor', () => {
+    expect(typeof OverScene).toBe('function');
+  });
+  it('Preload scene is a function constructor', () => {
+    expect(typeof MenuScene).toBe('function');
+  });
+  it('Preload scene is a function constructor', () => {
+    expect(typeof SubmitScore).toBe('function');
+  });
+  it('Preload scene is a function constructor', () => {
+    expect(typeof CreditsScene).toBe('function');
+  });
+  it('Preload scene is a function constructor', () => {
+    expect(typeof OptionsScene).toBe('function');
+  });
+  it('Game scene is a function constructor', () => {
+    expect(typeof GameScene).toBe('function');
+  });
+  it('Boot scene is a function constructor', () => {
+    expect(typeof BootScene).toBe('function');
+  });
 
-describe( 'Testing Scenes Constructor', () => {
+  it('Preload scene is a function constructor', () => {
+    expect(typeof PreloaderScene).toBe('function');
+  });
 
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof OverScene).toBe('function')
-    })
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof MenuScene).toBe('function')
-    })
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof SubmitScore).toBe('function')
-    })
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof CreditsScene).toBe('function')
-    })
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof OptionsScene).toBe('function')
-    })
-    it('Game scene is a function constructor', () => {
-        expect(typeof GameScene).toBe('function')
-
-    }) 
-    it ('Boot scene is a function constructor', () => {
-        expect(typeof BootScene).toBe('function')
-    })
-
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof PreloaderScene).toBe('function')
-    })
-
-    it ('Preload scene is a function constructor', () => {
-        expect(typeof TitleScene).toBe('function')
-    })
-})
+  it('Preload scene is a function constructor', () => {
+    expect(typeof TitleScene).toBe('function');
+  });
+});

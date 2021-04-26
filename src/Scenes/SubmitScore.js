@@ -1,5 +1,5 @@
-import Button from '../Objects/Button'
 import Phaser from 'phaser';
+import Button from '../Objects/Button';
 import leaderboard from '../module/apiScore';
 
 
@@ -12,31 +12,17 @@ export default class SubmitScore extends Phaser.Scene {
     super('SubmitScore');
   }
 
-  preload(){
-
-  }
 
   create() {
-   
-    let player = localStorage.getItem("playerName")
-    console.log(player)
+    const player = localStorage.getItem('playerName');
+
     const submit = async () => {
-
-      const response = await  leaderboard.addScore(player, this.score)
-      console.log(response)
-      
-        console.log(response.status)
-        this.scene.start('Over')
-     
-    
-    
-    }
-
-    submit()
-  
-        }
-  
+      const response = await leaderboard.addScore(player, this.score);
 
 
+      this.scene.start('Over');
+    };
+
+    submit();
+  }
 }
-
