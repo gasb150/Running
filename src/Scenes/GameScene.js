@@ -5,8 +5,8 @@ let gameOptions = {
   // platform speed range, in pixels per second
   platformSpeedRange: [300, 300],
 
-  // mountain speed, in pixels per second
-  mountainSpeed: 80,
+  // city speed, in pixels per second
+  citySpeed: 80,
 
   // spawn range, how far should be the rightmost platform from the right edge
   // before next platform spawns, in pixels
@@ -39,8 +39,8 @@ let gameOptions = {
   // % of probability a coin appears on the platform
   coinPercent: 25,
 
-  // % of probability a fire appears on the platform
-  firePercent: 25,
+  // % of probability a robot appears on the platform
+  robotPercent: 25,
 
   //
   waterPercent: 0
@@ -65,10 +65,10 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-    this.score = 0;
+    this.score = 20;
 
 
-    this.mountainGroup = this.add.group();
+    this.cityGroup = this.add.group();
 
     // Creating animations
     anims.create({
@@ -101,24 +101,14 @@ export default class GameScene extends Phaser.Scene {
     });
 
     anims.create({
-      key: "burn",
-      frames: anims.generateFrameNumbers("fire", {
-        start: 0,
-        end: 3
+      key: "robotEnemy",
+      frames: anims.generateFrameNumbers("robot", {
+        start: 55,
+        end: 62
       }),
-      frameRate: 15,
+      frameRate: 10,
       repeat: -1
     });
-
-    // anims.create({
-    //   key: "wet",
-    //   frames: anims.generateFrameNumbers("water", {
-    //     start: 0,
-    //     end: 4
-    //   }),
-    //   frameRate: 15,
-    //   repeat: -1
-    // })
 
     anims.create({
       key: "explode",
@@ -141,10 +131,10 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1
 
     });
-
+    this.dismanteledSound = this.sound.add('powerOff')
     this.jumpSound = this.sound.add('jump');
     this.coinSound = this.sound.add('coin')
-    this.fireSound = this.sound.add('fire', { allowMultiple: true })
+    this.robotSound = this.sound.add('robot', { allowMultiple: true })
     this.burningSoudns = this.sound.add('burning')
 
 
@@ -190,21 +180,21 @@ export default class GameScene extends Phaser.Scene {
     });
 
 
-    // group with all active firecamps.
-    this.fireGroup = this.add.group({
+    // group with all active robotcamps.
+    this.robotGroup = this.add.group({
 
-      // once a firecamp is removed, it's added to the pool
-      removeCallback: (fire) => {
-        fire.scene.firePool.add(fire)
+      // once a robotcamp is removed, it's added to the pool
+      removeCallback: (robot) => {
+        robot.scene.robotPool.add(robot)
       }
     });
 
-    // fire pool
-    this.firePool = this.add.group({
+    // robot pool
+    this.robotPool = this.add.group({
 
-      // once a fire is removed from the pool, it's added to the active fire group
-      removeCallback: (fire) => {
-        fire.scene.fireGroup.add(fire)
+      // once a robot is removed from the pool, it's added to the active robot group
+      removeCallback: (robot) => {
+        robot.scene.robotGroup.add(robot)
       }
     });
 
@@ -223,8 +213,10 @@ export default class GameScene extends Phaser.Scene {
     })
 
 
-    // adding a mountain
-    this.addMountains()
+    // adding a city
+    this.addCity()
+
+    this.game.backgroundColor = '#101821'
 
     // keeping track of added platforms
     this.addedPlatforms = 0;
@@ -246,7 +238,9 @@ export default class GameScene extends Phaser.Scene {
     this.dying = false;
 
     if (this.dying === true) {
-      this.fireSound.stop()
+     
+      this.robotSound.stop()
+      
     }
 
     // setting collisions between the player and the platform group
@@ -259,7 +253,7 @@ export default class GameScene extends Phaser.Scene {
     physics.add.overlap(this.player, this.coinGroup, this.collectCoin, null, this);
 
 
-    physics.add.overlap(this.player, this.fireGroup, this.touchFire, null, this);
+    physics.add.overlap(this.player, this.robotGroup, this.touchRobot, null, this);
     physics.add.overlap(this.player, this.waterGroup, this.touchWater, null, this);
 
     // checking for input
@@ -267,9 +261,11 @@ export default class GameScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-SPACE', this.jump, this);
 
     this.scoreText = add.text(16, 16, 'score: 0', {
-      fontSize: '32px',
-      fill: '#000',
+      fontSize: '52px',
+      fill: '#f9f9f9',
     });
+
+    this.scoreText.setDepth(4)
 
   
   }
@@ -277,26 +273,27 @@ export default class GameScene extends Phaser.Scene {
 
 
   ///////////////////////////////////
-  addMountains() {
-    let rightmostMountain = this.getRightmostMountain();
-    if (rightmostMountain < game.config.width * 2) {
-      let mountain = this.physics.add.sprite(rightmostMountain + Phaser.Math.Between(100, 350), game.config.height + Phaser.Math.Between(0, 100), "mountain");
-      mountain.setOrigin(0.5, 1);
-      mountain.body.setVelocityX(gameOptions.mountainSpeed * -1)
-      this.mountainGroup.add(mountain);
+  addCity() {
+    let rightmostCity = this.getRightmostCity();
+    if (rightmostCity < game.config.width * 2) {
+      let city = this.physics.add.sprite(rightmostCity + Phaser.Math.Between(100, 350), game.config.height + Phaser.Math.Between(0, 0), "city");
+      city.setOrigin(0.5, 1);
+      city.setScale(2)
+      city.body.setVelocityX(gameOptions.citySpeed * -1)
+      this.cityGroup.add(city);
       if (Phaser.Math.Between(0, 1)) {
-        mountain.setDepth(1);
+        city.setDepth(1);
       }
-      mountain.setFrame(Phaser.Math.Between(0, 3))
-      this.addMountains()
+      city.setFrame(Phaser.Math.Between(0, 3))
+      this.addCity()
     }
   }
-  getRightmostMountain() {
-    let rightmostMountain = -200;
-    this.mountainGroup.getChildren().forEach((mountain) => {
-      rightmostMountain = Math.max(rightmostMountain, mountain.x);
+  getRightmostCity() {
+    let rightmostCity = -200;
+    this.cityGroup.getChildren().forEach((city) => {
+      rightmostCity = Math.max(rightmostCity, city.x);
     })
-    return rightmostMountain;
+    return rightmostCity;
   }
   collectCoin(player, coin) {
 
@@ -316,7 +313,7 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-  touchFire(player, fire) {
+  touchRobot(player, robot) {
     this.dying = true;
     this.player.anims.stop();
     player.anims.play("explode")
@@ -385,28 +382,28 @@ export default class GameScene extends Phaser.Scene {
           this.coinGroup.add(coin);
         }
       }
-      if (Phaser.Math.Between(1, 100) <= gameOptions.firePercent) {
-        if (this.firePool.getLength()) {
-          let fire = this.firePool.getFirst();
+      if (Phaser.Math.Between(1, 100) <= gameOptions.robotPercent) {
+        if (this.robotPool.getLength()) {
+          let robot = this.robotPool.getFirst();
 
-          fire.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
-          fire.y = posY - 46;
-          fire.alpha = 1;
-          fire.active = true;
-          fire.visible = true;
-          this.firePool.remove(fire);
+          robot.x = posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth);
+          robot.y = posY - 46;
+          robot.alpha = 1;
+          robot.active = true;
+          robot.visible = true;
+          this.robotPool.remove(robot);
 
         }
         else {
 
-          let fire = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "fire");
-          fire.setImmovable(true);
-          fire.setVelocityX(platform.body.velocity.x);
-          fire.setSize(8, 2, true)
-          fire.anims.play("burn");
-          fire.setDepth(2);
-          this.fireGroup.add(fire);
-          this.fireSound.play()
+          let robot = this.physics.add.sprite(posX - platformWidth / 2 + Phaser.Math.Between(1, platformWidth), posY - 46, "robot");
+          robot.setImmovable(true);
+          robot.setVelocityX(platform.body.velocity.x);
+          robot.setSize(8, 2, true)
+          robot.anims.play("robotEnemy");
+          robot.setDepth(2);
+          this.robotGroup.add(robot);
+          this.robotSound.play()
 
         }
       }
@@ -434,7 +431,7 @@ export default class GameScene extends Phaser.Scene {
           // water.anims.play("wet");
           water.setDepth(2);
           this.waterGroup.add(water);
-          // this.fireSound.play()
+          // this.robotSound.play()
 
         }
 
@@ -465,7 +462,9 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.player.y > game.config.height) {
-      this.scene.start("SubmitScore", this.score);
+      this.dismanteledSound.play()
+       this.scene.start("SubmitScore", this.score);
+      // this.scene.start('Game')
     }
     this.player.x = gameOptions.playerStartPosition;
 
@@ -490,6 +489,8 @@ export default class GameScene extends Phaser.Scene {
           this.score += 3;
         }
         this.scoreText.setText(`Score: ${this.score}`);
+       
+
       }
     }, this);
 
@@ -503,14 +504,14 @@ export default class GameScene extends Phaser.Scene {
         this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
-    //reciclin fire
-    this.fireGroup.getChildren().forEach((fire) => {
-      if (fire.x < - fire.displayWidth / 2) {
-        this.fireGroup.killAndHide(fire);
-        this.fireGroup.remove(fire);
+    //reciclin robot
+    this.robotGroup.getChildren().forEach((robot) => {
+      if (robot.x < - robot.displayWidth / 2) {
+        this.robotGroup.killAndHide(robot);
+        this.robotGroup.remove(robot);
         this.score += 5;
         this.scoreText.setText(`Score: ${this.score}`);
-        this.fireSound.stop()
+        this.robotSound.stop()
       }
     }, this);
     //reciclin water
@@ -520,19 +521,20 @@ export default class GameScene extends Phaser.Scene {
         this.waterGroup.remove(water);
         this.score += 5;
         this.scoreText.setText(`Score: ${this.score}`);
+        this.scoreText.setColor('#101821')
         //  this.waterSound.stop()
       }
     }, this);
 
-    // recycling mountains
-    this.mountainGroup.getChildren().forEach((mountain) => {
-      if (mountain.x < - mountain.displayWidth) {
-        let rightmostMountain = this.getRightmostMountain();
-        mountain.x = rightmostMountain + Phaser.Math.Between(100, 350);
-        mountain.y = game.config.height + Phaser.Math.Between(0, 100);
-        mountain.setFrame(Phaser.Math.Between(0, 3))
+    // recycling city
+    this.cityGroup.getChildren().forEach((city) => {
+      if (city.x < - city.displayWidth) {
+        let rightmostCity = this.getRightmostCity();
+        city.x = rightmostCity + Phaser.Math.Between(100, 350);
+        city.y = game.config.height + Phaser.Math.Between(0, 100);
+        city.setFrame(Phaser.Math.Between(0, 3))
         if (Phaser.Math.Between(0, 1)) {
-          mountain.setDepth(1);
+          city.setDepth(1);
         }
       }
     }, this);
@@ -556,7 +558,6 @@ export default class GameScene extends Phaser.Scene {
 }
 
 const increaseDifficulty = (score, player) => {
-  console.log(gameOptions.firePercent)
 
   if (score > 300) {
 
@@ -564,14 +565,14 @@ const increaseDifficulty = (score, player) => {
 
     gameOptions.platformSpeedRange = [500, 900]
     console.log(gameOptions.platformSpeedRange)
-    gameOptions.firePercent = 25 + score / 100
+    gameOptions.robotPercent = 25 + score / 100
     gameOptions.waterPercent = 40 + score / 100
 
   }
   else if (score > 100) {
 
 
-    gameOptions.firePercent = 25 + score / 100
+    gameOptions.robotPercent = 25 + score / 100
 
 
     gameOptions.waterPercent = 40 + score / 100
@@ -579,7 +580,7 @@ const increaseDifficulty = (score, player) => {
   else {
 
     gameOptions.platformSpeedRange = [300, 300],
-      gameOptions.firePercent = 25
+      gameOptions.robotPercent = 25
 
 
     gameOptions.waterPercent = 0

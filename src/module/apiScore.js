@@ -1,4 +1,4 @@
-const key = 'wdvUmWbYZ2zk8tMSzwiZ'
+const key = 'Uh2fXVQusd6Esz5AkTkR'
 
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
 

@@ -12,9 +12,9 @@ export default class OverScene extends Phaser.Scene {
      this.add.text(game.config.width/2.7, 50, 'Game Over', { fontSize: '48px', fill: 'black', fontFamily: 'bold' });
      this.musicButton = this.add.image(game.config.width/3, 150, 'scoreIcon')
 
-     this.gameButton = new Button(this, game.config.width/4 , game.config.height - 80, 'greenButton1', 'blueButton2', 'Re-play', 'Game');
-     this.gameButton = new Button(this, game.config.width/1.3 , game.config.height - 80, 'greenButton1', 'blueButton2', 'Home', 'Menu');
-
+     this.gameButton = new Button(this, game.config.width/4 , game.config.height - 80, 'greenButton1', 'greenButton2', 'Re-play', 'Game');
+     this.homeButton = new Button(this, game.config.width/1.3 , game.config.height - 80, 'greenButton1', 'greenButton2', 'Home', 'Menu');
+    
     async function result() {
       const response = await api.getInfo()
     
@@ -33,27 +33,27 @@ export default class OverScene extends Phaser.Scene {
         const divLeaderboard = document.createElement('div');
         const divNoLeaders = document.createElement('div')
         arrayTop.forEach((score, index) => {
-        const p1 = document.createElement('p');
-        const p2 = document.createElement('p')
-        p1.classList.add("scoreInfo", "leaders")
-        p2.classList.add("scoreInfo")
+        const pdivp1 = document.createElement('p');
+        const pdivp2 = document.createElement('p')
+        pdivp1.classList.add("scoreInfo", "leaders")
+        pdivp2.classList.add("scoreInfo")
 
         if (index < 3){
-          p1.style.color = "red"
+          pdivp1.style.color = "red"
         }
         if (index < 2){
-          p1.style.color = "yellow"
+          pdivp1.style.color = "yellow"
         }
         if (index < 1){
-          p1.style.color ="green"
+          pdivp1.style.color ="green"
         }
         if (index < 3){ 
-        p1.innerText = `#${index + 1} - ${score.user}  ................. ${score.score}`;
+          pdivp1.innerHTML = `<p> #${index + 1}</p> <p>-${score.user}</p>  <p>${score.score}</p>`;
         } else {
-          p2.innerText = `#${index + 1} - ${score.user}  ................. ${score.score}`;
+          pdivp2.innerHTML = `<p> #${index + 1}</p> <p>-${score.user}</p>  <p>${score.score}</p>`;
         }
-        divLeaderboard.appendChild(p1);
-        divNoLeaders.appendChild(p2);
+        divLeaderboard.appendChild(pdivp1);
+        divNoLeaders.appendChild(pdivp2);
       });
 
 
@@ -68,10 +68,15 @@ export default class OverScene extends Phaser.Scene {
       score.style.top="200px"
       score.style.left="200px"
     
-    
+      this.model = this.sys.game.globals.model;
+      if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+        this.model.bgMusicPlaying = false
+        this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+        this.bgMusic.play();
+        this.sys.game.globals.bgMusic = this.bgMusic
+      }
 
-        
-        console.log(response)
+   
     }
     display()
   }

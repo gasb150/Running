@@ -11,7 +11,7 @@
   #score {
     position: absolute;
     display: flex;
-    width: 800px;
+    width: 1000px;
     flex-direction: column;
     top: 10%;
     left: 20%;
@@ -22,6 +22,8 @@
  
   .scoreInfo{
     font-size: 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr;
   }
 
   .leaders{

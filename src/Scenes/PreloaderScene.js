@@ -82,26 +82,25 @@ export default class PreloaderScene extends Phaser.Scene {
 
 
     this.load.image('greenButton1', '/src/assets/ui/greenButton1.png');
-    
     this.load.image('greenButton2', '/src/assets/ui/greenButton2.png');
     this.load.image('scoreIcon', '/src/assets/ui/score.png');
-    this.load.image('phaserLogo', '/src/assets/logo.png');
+    this.load.image('logo', '/src/assets/logo.png');
     this.load.image('noChekedM', '/src/assets/ui/disableMusic.png')
     this.load.image('checkedM', '/src/assets/ui/ableMusic.png');
     this.load.image('noChekedS', '/src/assets/ui/disableSounds.png')
     this.load.image('checkedS', '/src/assets/ui/ableSounds.png');
     this.load.audio('bgMusic', ['/src/assets/Sounds/TownTheme.mp3']);
-
-    this.load.audio('fire', ['/src/assets/Sounds/fire.wav'])
+    this.load.audio('powerOff',['/src/assets/Sounds/MachinePowerOff.ogg'] )
+    this.load.audio('robot', ['/src/assets/Sounds/robot.mp3'])
     this.load.audio('burning', ['/src/assets/Sounds/burning.wav'])
     this.load.audio('jump', ['/src/assets/Sounds/jump.wav']);
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image("platform", "platform.png");
     this.load.image("spike", "Spike.png");
-    this.load.spritesheet('loadIcon', 'load.png', {
-      frameWidth: 100,
-      frameHeight: 110,
-    });
+    // this.load.spritesheet('loadIcon', 'load.png', {
+    //   frameWidth: 100,
+    //   frameHeight: 110,
+    // });
    
     
 
@@ -125,16 +124,16 @@ export default class PreloaderScene extends Phaser.Scene {
       frameHeight: 20
     });
 
-    this.load.spritesheet("fire", "fire.png",
+    this.load.spritesheet("robot", "spritesheet.png",
       {
-        frameWidth: 40,
-        frameHeight: 70
+        frameWidth: 64,
+        frameHeight: 64
       }
     );
 
-    this.load.spritesheet("mountain", "mountain.png", {
-      frameWidth: 512,
-      frameHeight: 512
+    this.load.spritesheet("city", "nightCity.png", {
+      frameWidth: 640,
+      frameHeight: 320
     });
 
   }
@@ -145,7 +144,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.readyCount++;
 
     if (this.readyCount === 2) {
-      this.scene.start('Name');
+      this.scene.start('Title');
     }
   }
 
