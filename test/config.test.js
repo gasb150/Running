@@ -20,10 +20,10 @@ describe('Test game config', () => {
         expect(config).toHaveProperty('backgroundColor');
       });
       it('Testing if that object have the right attributes', () => {
-        expect(config).toHaveProperty('default: "arcade"');
+        expect(config).toHaveProperty('physics');
       });
       it('Testing if that object have the right physics settings', () => {
-        expect(config.physics).toBe('arcade');
+        expect(config.physics).toStrictEqual( {default: "arcade"});
       });
   });
 
