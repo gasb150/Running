@@ -1,5 +1,5 @@
 import clear from '../module/clear'
-
+import 'phaser'
 let gameOptions = {
 
   // platform speed range, in pixels per second
