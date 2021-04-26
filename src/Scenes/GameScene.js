@@ -65,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-    this.score = 80;
+    this.score = 0;
 
 
     this.mountainGroup = this.add.group();
