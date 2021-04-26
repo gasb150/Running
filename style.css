@@ -40,4 +40,17 @@
 
   input{
       font-size: 40px;
+      border-radius: 5px;
+      border: none;
+  }
+
+  #submit{
+    background-color: rgb(187,235,93);
+    color: black;
+    border-radius: 5px;
+    border: none;
+  }
+
+  #submit:hover{
+    background-color: #6fae23;
   }

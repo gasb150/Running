@@ -8,7 +8,9 @@ export default class OverScene extends Phaser.Scene {
   }
 
   create() {
-    console.log(game.config.width)
+       
+    this.sys.game.globals.bgMusic.stop();
+
      this.add.text(game.config.width/2.7, 50, 'Game Over', { fontSize: '48px', fill: 'black', fontFamily: 'bold' });
      this.musicButton = this.add.image(game.config.width/3, 150, 'scoreIcon')
 
@@ -67,14 +69,6 @@ export default class OverScene extends Phaser.Scene {
       score.style.columnGap ="50px"
       score.style.top="200px"
       score.style.left="200px"
-    
-      this.model = this.sys.game.globals.model;
-      if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
-        this.model.bgMusicPlaying = false
-        this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-        this.bgMusic.play();
-        this.sys.game.globals.bgMusic = this.bgMusic
-      }
 
    
     }

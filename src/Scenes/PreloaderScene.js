@@ -95,8 +95,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('burning', ['/src/assets/Sounds/burning.wav'])
     this.load.audio('jump', ['/src/assets/Sounds/jump.wav']);
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
-    this.load.image("platform", "platform.png");
-    this.load.image("spike", "Spike.png");
+    this.load.image("platform", "/src/assets/images/platform.png");
+    this.load.image("spike", "/src/assets/images/Spike.png");
     // this.load.spritesheet('loadIcon', 'load.png', {
     //   frameWidth: 100,
     //   frameHeight: 110,
@@ -104,34 +104,34 @@ export default class PreloaderScene extends Phaser.Scene {
    
     
 
-    this.load.spritesheet("explode", "explode.png", {
+    this.load.spritesheet("explode", "/src/assets/images/explode.png", {
       frameWidth: 341.33,
       frameHeight: 341.33
     })
 
-    this.load.spritesheet("player", "/src/assets/player.png", {
+    this.load.spritesheet("player", "/src/assets/images/player.png", {
       frameWidth: 58.75,
       frameHeight: 57
     });
 
-    this.load.spritesheet("playerJump", "/src/assets/player.png", {
+    this.load.spritesheet("playerJump", "/src/assets/images/player.png", {
       frameWidth: 58.75,
       frameHeight: 62.5
     });
 
-    this.load.spritesheet("coin", "coin.png", {
+    this.load.spritesheet("coin", "/src/assets/images/coin.png", {
       frameWidth: 20,
       frameHeight: 20
     });
 
-    this.load.spritesheet("robot", "spritesheet.png",
+    this.load.spritesheet("robot", "/src/assets/images/robotEnemy.png",
       {
         frameWidth: 64,
         frameHeight: 64
       }
     );
 
-    this.load.spritesheet("city", "nightCity.png", {
+    this.load.spritesheet("city", "/src/assets/images/nightCity.png", {
       frameWidth: 640,
       frameHeight: 320
     });
