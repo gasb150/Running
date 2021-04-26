@@ -568,9 +568,8 @@ const increaseDifficulty = (score, player) => {
     gameOptions.waterPercent = 40 + score / 100
 
   }
-  else if (score > 1) {
+  else if (score > 100) {
 
-    //   // % of probability a fire appears on the platform
 
     gameOptions.firePercent = 25 + score / 100
 
