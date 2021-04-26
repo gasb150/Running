@@ -1,56 +1,52 @@
 
 #container {
-    position: absolute;
-    top: 410px;
-    left: 279px;
-    /* display: none; */
-    width: 600px;
- 
-  }
- 
-  #score {
-    position: absolute;
-    display: flex;
-    width: 1000px;
-    flex-direction: column;
-    top: 10%;
-    left: 20%;
+  position: absolute;
+  top: 410px;
+  left: 279px;
+
+  /* display: none; */
+  width: 600px;
+}
+
+#score {
+  position: absolute;
+  display: flex;
+  width: 1000px;
+  flex-direction: column;
+  top: 10%;
+  left: 20%;
+}
 
 
-  }
+.scoreInfo {
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+}
 
- 
-  .scoreInfo{
-    font-size: 20px;
-    display: grid;
-    grid-template-columns: 1fr 3fr 2fr;
-  }
+.leaders {
+  font-size: 35px;
+}
 
-  .leaders{
-    font-size: 35px;
-  }
+#leaderBoard {
+  position: relative;
+  top: -300px;
+  font-size: 24px;
+}
 
+input {
+  font-size: 40px;
+  border-radius: 5px;
+  border: none;
+}
 
-  #leaderBoard{
-    position: relative;
-    top: -300px;
-    font-size: 24px;
-    
-  }
+#submit {
+  background-color: rgb(187, 235, 93);
+  color: black;
+  border-radius: 5px;
+  border: none;
+}
 
-  input{
-      font-size: 40px;
-      border-radius: 5px;
-      border: none;
-  }
-
-  #submit{
-    background-color: rgb(187,235,93);
-    color: black;
-    border-radius: 5px;
-    border: none;
-  }
-
-  #submit:hover{
-    background-color: #6fae23;
-  }
+#submit:hover {
+  background-color: #6fae23;
+}
