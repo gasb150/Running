@@ -65,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
     clear('score');
 
 
-    this.score = 20;
+    this.score = 0;
 
 
     this.cityGroup = this.add.group();
