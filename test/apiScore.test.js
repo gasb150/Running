@@ -1,5 +1,5 @@
 
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const key = 'wdvUmWbYZ2zk8tMSzwiZ';
 
