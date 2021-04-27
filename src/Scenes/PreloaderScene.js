@@ -98,10 +98,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image('platform', '/src/assets/images/platform.png');
     this.load.image('spike', '/src/assets/images/Spike.png');
-    // this.load.spritesheet('loadIcon', 'load.png', {
-    //   frameWidth: 100,
-    //   frameHeight: 110,
-    // });
 
 
     this.load.spritesheet('explode', '/src/assets/images/explode.png', {
@@ -137,11 +133,11 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start('Intro');
+    this.scene.start('Instructions');
     this.readyCount += 1;
 
     if (this.readyCount === 2) {
-      this.scene.start('Intro');
+      this.scene.start('Instructions');
     }
   }
 }
