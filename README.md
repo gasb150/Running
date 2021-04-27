@@ -12,6 +12,10 @@ You will see your position if your score is higher than the player in the #10 po
 
 [Play me](https://thirsty-mcnulty-d6efb3.netlify.app/)
 
+
+## Video Description
+
+[video](https://www.loom.com/share/63cfd2c941624e33ba7dac0db22fb777)
 ## How to play
 
 TO play you can use, click, or the space key.

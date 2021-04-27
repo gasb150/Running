@@ -48,10 +48,10 @@ const gameOptions = {
   //
   waterPercent: 0,
 };
-// window.onload = () => {
-//   resize();
-//   window.addEventListener("resize", resize, false);
-// }
+ window.onload = () => {
+ resize();
+   window.addEventListener("resize", resize, false);
+ }
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
