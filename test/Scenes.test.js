@@ -1,4 +1,3 @@
-// import config from './Config/config';
 import BootScene from '../src/Scenes/BootScene';
 import CreditsScene from '../src/Scenes/CreditsScene';
 import GameScene from '../src/Scenes/GameScene';

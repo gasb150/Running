@@ -48,10 +48,10 @@ const gameOptions = {
   //
   waterPercent: 0,
 };
- window.onload = () => {
- resize();
-   window.addEventListener("resize", resize, false);
- }
+window.onload = () => {
+  resize();
+  window.addEventListener("resize", resize, false);
+}
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -269,7 +269,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
 
-  // /////////////////////////////////
+
   addCity() {
     const rightmostCity = this.getRightmostCity();
     if (rightmostCity < config.width * 2) {
@@ -318,10 +318,10 @@ export default class GameScene extends Phaser.Scene {
   touchWater(player, water) {
     this.dying = true;
     this.player.anims.stop();
-    // player.anims.play("explode")
+
     this.player.setFrame(2);
     this.player.body.setVelocityY(-200);
-    // this.burningSoudns.play()
+
     this.physics.world.removeCollider(this.platformCollider);
   }
 
@@ -410,10 +410,10 @@ export default class GameScene extends Phaser.Scene {
           water.setImmovable(true);
           water.setVelocityX(platform.body.velocity.x);
           water.setSize(8, 2, true);
-          // water.anims.play("wet");
+
           water.setDepth(2);
           this.waterGroup.add(water);
-          // this.robotSound.play()
+
         }
       }
     }
@@ -440,7 +440,7 @@ export default class GameScene extends Phaser.Scene {
     if (this.player.y > config.height) {
       this.dismanteledSound.play();
       this.scene.start('SubmitScore', this.score);
-      // this.scene.start('Game')
+
     }
     this.player.x = gameOptions.playerStartPosition;
 
@@ -494,7 +494,7 @@ export default class GameScene extends Phaser.Scene {
         this.score += 5;
         this.scoreText.setText(`Score: ${this.score}`);
         this.scoreText.setColor('#101821');
-        //  this.waterSound.stop()
+
       }
     }, this);
 
