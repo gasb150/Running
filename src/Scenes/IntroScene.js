@@ -3,6 +3,8 @@ import config from '../Config/config';
 import Button from '../Objects/Button';
 import clear from '../module/clear';
 
+
+
 export default class IntroScene extends Phaser.Scene {
   constructor() {
     super('Intro');

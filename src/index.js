@@ -1,6 +1,8 @@
-// import completeGame from './module/game'
+
 import '../style.css';
-// completeGame()
+import '../reset.css';
+
+
 
 import Phaser from 'phaser';
 import config from './Config/config';
@@ -20,6 +22,7 @@ import IntroScene from './Scenes/IntroScene';
 class Game extends Phaser.Game {
   constructor() {
     super(config);
+
     const model = new Model();
     this.globals = { model, bgMusic: null };
     this.scene.add('Boot', BootScene);
