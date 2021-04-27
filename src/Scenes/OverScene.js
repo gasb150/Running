@@ -20,10 +20,8 @@ export default class OverScene extends Phaser.Scene {
     const result = async () => {
       const response = await api.getInfo();
 
-
       return response;
     };
-
 
     const display = async () => {
       const response = await result();
@@ -55,7 +53,6 @@ export default class OverScene extends Phaser.Scene {
         divLeaderboard.appendChild(pdivp1);
         divNoLeaders.appendChild(pdivp2);
       });
-
 
       const score = document.getElementById('score');
       score.appendChild(divLeaderboard);

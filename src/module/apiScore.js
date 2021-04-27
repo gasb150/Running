@@ -2,9 +2,7 @@ const key = 'Uh2fXVQusd6Esz5AkTkR';
 
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${key}/scores/`;
 
-
 const fetch = require('node-fetch');
-
 
 const leaderboard = (() => {
   const addScore = async (name, score) => {
@@ -23,7 +21,6 @@ const leaderboard = (() => {
     return response;
   };
 
-
   const getInfo = async () => {
     try {
       const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
@@ -39,6 +36,5 @@ const leaderboard = (() => {
     getInfo,
   };
 })();
-
 
 export default leaderboard;

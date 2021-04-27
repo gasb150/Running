@@ -1,8 +1,6 @@
-
 import fetch from 'node-fetch';
 
 const key = 'wdvUmWbYZ2zk8tMSzwiZ';
-
 
 it('Leaderboard score created correctly.', async () => {
   const response = await fetch(

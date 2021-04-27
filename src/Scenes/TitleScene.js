@@ -5,7 +5,6 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
-
   create() {
     this.add.text(280, 100, 'Enter your player name', {
       color: '#5d1512', fontFamily: 'Arial', fontSize: '60px ', fontWeight: '900',
@@ -39,7 +38,6 @@ export default class TitleScene extends Phaser.Scene {
 
           localStorage.setItem('playerName', user.value);
 
-
           this.scene.start('Menu');
         }
       }
@@ -53,7 +51,6 @@ export default class TitleScene extends Phaser.Scene {
           element.innerHTML = '';
 
           localStorage.setItem('playerName', user.value);
-
 
           this.scene.start('Menu');
         }

@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 
-
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -12,7 +11,6 @@ export default class PreloaderScene extends Phaser.Scene {
 
   preload() {
     this.add.image(400, 200, 'logo');
-
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -54,7 +52,6 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     assetText.setOrigin(0.5, 0.5);
 
-
     this.load.on('progress', (percent) => {
       percentText.setText(`${parseInt(percent * 100, 10)}%`);
       progressBar.clear();
@@ -62,11 +59,9 @@ export default class PreloaderScene extends Phaser.Scene {
       progressBar.fillRect(250, 280, 300 * percent, 30);
     });
 
-
     this.load.on('fileprogress', (file) => {
       assetText.setText(`Loading asset:${file.key}`);
     });
-
 
     this.load.on('complete', () => {
       progressBar.destroy();
@@ -79,7 +74,6 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
-
 
     this.load.image('greenButton1', '/src/assets/ui/greenButton1.png');
     this.load.image('greenButton2', '/src/assets/ui/greenButton2.png');
@@ -97,7 +91,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('coin', ['/src/assets/Sounds/coin.ogg']);
     this.load.image('platform', '/src/assets/images/platform.png');
     this.load.image('spike', '/src/assets/images/Spike.png');
-
 
     this.load.spritesheet('explode', '/src/assets/images/explode.png', {
       frameWidth: 341.33,

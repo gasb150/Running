@@ -2,7 +2,6 @@ import Model from '../src/Model';
 
 const newModel = new Model();
 
-
 describe('Test Model creation', () => {
   it('Testing if model returns an object', () => {
     expect(typeof newModel).toBe('object');

@@ -6,7 +6,6 @@ export default {
   height: 600,
   backgroundColor: '#3a5163',
 
-
   // physics settings
   physics: {
     default: 'arcade',

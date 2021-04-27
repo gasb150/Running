@@ -1,4 +1,3 @@
-
 import BootScene from '../src/Scenes/BootScene';
 import CreditsScene from '../src/Scenes/CreditsScene';
 import GameScene from '../src/Scenes/GameScene';
@@ -10,7 +9,6 @@ import PreloaderScene from '../src/Scenes/PreloaderScene';
 import SubmitScore from '../src/Scenes/SubmitScore';
 
 import TitleScene from '../src/Scenes/TitleScene';
-
 
 describe('Testing Scenes Constructor', () => {
   it('Over scene is a function constructor', () => {

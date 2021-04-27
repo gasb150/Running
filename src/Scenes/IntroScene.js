@@ -2,15 +2,12 @@ import Phaser from 'phaser';
 import config from '../Config/config';
 import Button from '../Objects/Button';
 
-
 export default class IntroScene extends Phaser.Scene {
   constructor() {
     super('Intro');
   }
 
-
   create() {
-    //
 
     this.titleText = this.add.text(config.width / 2 - 200, 100, 'Robot runner', { fontSize: '32px', fill: '#fff' });
     this.pargraphText1 = this.add.text(config.width / 2 - 500, 250, 'An innocent robot is trying to escape from his "home."', { fontSize: '26px', fill: '#fff' });

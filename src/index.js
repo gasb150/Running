@@ -1,7 +1,5 @@
-
 import '../style.css';
 import '../reset.css';
-
 
 import Phaser from 'phaser';
 import config from './Config/config';

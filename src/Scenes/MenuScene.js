@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import clear from '../module/clear';
 
-
 import config from '../Config/config';
 import Button from '../Objects/Button';
 

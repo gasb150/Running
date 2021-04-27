@@ -1,6 +1,4 @@
-
 import config from '../src/Config/config';
-
 
 describe('Test game config', () => {
   it('Testing if model returns an object', () => {

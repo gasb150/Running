@@ -45,7 +45,6 @@ const gameOptions = {
   // % of probability a robot appears on the platform
   robotPercent: 25,
 
-  //
   waterPercent: 0,
 };
 const increaseDifficulty = (score, player) => {
@@ -59,12 +58,10 @@ const increaseDifficulty = (score, player) => {
   } else if (score > 100) {
     gameOptions.robotPercent = 25 + score / 100;
 
-
     gameOptions.waterPercent = 40 + score / 100;
   } else {
     gameOptions.platformSpeedRange = [300, 300];
     gameOptions.robotPercent = 25;
-
 
     gameOptions.waterPercent = 0;
   }
@@ -94,16 +91,12 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-
   create() {
     const { anims, physics, add } = this;
 
-
     clear('score');
 
-
     this.score = 0;
-
 
     this.cityGroup = this.add.group();
 
@@ -174,7 +167,6 @@ export default class GameScene extends Phaser.Scene {
     this.robotSound = this.sound.add('robot', { allowMultiple: true });
     this.burningSoudns = this.sound.add('burning');
 
-
     // /Platform Group and Pool//
 
     this.platformGroup = add.group({
@@ -193,7 +185,6 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
-
     // COIN GROUP AND POOL //
 
     // group with all active coins.
@@ -206,7 +197,6 @@ export default class GameScene extends Phaser.Scene {
 
     });
 
-
     this.coinPool = this.add.group({
 
       // once a coin is removed from the pool, it's added to the active coins group
@@ -214,7 +204,6 @@ export default class GameScene extends Phaser.Scene {
         coin.scene.coinGroup.add(coin);
       },
     });
-
 
     // group with all active robotcamps.
     this.robotGroup = this.add.group({
@@ -248,7 +237,6 @@ export default class GameScene extends Phaser.Scene {
       },
     });
 
-
     // adding a city
     this.addCity();
 
@@ -256,7 +244,6 @@ export default class GameScene extends Phaser.Scene {
 
     // keeping track of added platforms
     this.addedPlatforms = 0;
-
 
     // number of consecutive jumps made by the player
     this.playerJumps = 0;
@@ -266,7 +253,6 @@ export default class GameScene extends Phaser.Scene {
     const optWidth = config.width;
     const optHeight = config.height;
     this.addPlatform(optWidth, optWidth / 2, optHeight * optPlatLimit[1]);
-
 
     // adding the player;
     this.player = this.physics.add.sprite(gameOptions.playerStartPosition, config.height * 0.7, 'player');
@@ -289,7 +275,6 @@ export default class GameScene extends Phaser.Scene {
 
     physics.add.overlap(this.player, this.coinGroup, this.collectCoin, null, this);
 
-
     physics.add.overlap(this.player, this.robotGroup, this.touchRobot, null, this);
     physics.add.overlap(this.player, this.waterGroup, this.touchWater, null, this);
 
@@ -304,7 +289,6 @@ export default class GameScene extends Phaser.Scene {
 
     this.scoreText.setDepth(4);
   }
-
 
   addCity() {
     const rightmostCity = this.getRightmostCity();
@@ -333,13 +317,11 @@ export default class GameScene extends Phaser.Scene {
   collectCoin(coin) {
     this.coinSound.play();
 
-
     this.coinGroup.killAndHide(coin);
     this.coinGroup.remove(coin);
     this.score += 10;
     this.scoreText.setText(`Score: ${this.score}`);
   }
-
 
   touchRobot(player) {
     this.dying = true;
@@ -360,7 +342,6 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.world.removeCollider(this.platformCollider);
   }
-
 
   addPlatform(platformWidth, posX, posY) {
     increaseDifficulty(this.score, this.player);
@@ -387,7 +368,6 @@ export default class GameScene extends Phaser.Scene {
     }
     const optionsSpawnRange = gameOptions.spawnRange;
     this.nextPlatformDistance = Phaser.Math.Between(optionsSpawnRange[0], optionsSpawnRange[1]);
-
 
     if (this.addedPlatforms > 1) {
       // is there a coin over the platform?
@@ -470,14 +450,12 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-
   update() {
     if (this.player.y > config.height) {
       this.dismanteledSound.play();
       this.scene.start('SubmitScore', this.score);
     }
     this.player.x = gameOptions.playerStartPosition;
-
 
     // recycling platforms
     let minDistance = config.width;
@@ -499,7 +477,6 @@ export default class GameScene extends Phaser.Scene {
         this.scoreText.setText(`Score: ${this.score}`);
       }
     }, this);
-
 
     // recycling coins
     this.coinGroup.getChildren().forEach((coin) => {
