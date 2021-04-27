@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "start": "npm run build && webpack-dev-server --port=8000",
+    "start": "es-dev-server --app-index index.html --node-resolve --watch",
     "test": "jest"
   },
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/gasb150/Running#readme",
   "devDependencies": {
+    "es-dev-server": "^1.57.8",
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.13.16",
     "@babel/plugin-transform-arrow-functions": "^7.13.0",
