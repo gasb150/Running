@@ -23,11 +23,11 @@ const leaderboard = (() => {
 
 
   const getInfo = async () => {
-    const data = await fetch(url, { mode: 'cors' }).then(response => response.json());
+    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
     return data;
   };
-  const y = getInfo();
+
   return {
     addScore,
     getInfo,

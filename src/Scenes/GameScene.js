@@ -48,10 +48,47 @@ const gameOptions = {
   //
   waterPercent: 0,
 };
+const increaseDifficulty = (score, player) => {
+  if (score > 300) {
+    player.setVelocityX(700);
+
+    gameOptions.platformSpeedRange = [500, 900];
+
+    gameOptions.robotPercent = 25 + score / 100;
+    gameOptions.waterPercent = 40 + score / 100;
+  } else if (score > 100) {
+    gameOptions.robotPercent = 25 + score / 100;
+
+
+    gameOptions.waterPercent = 40 + score / 100;
+  } else {
+    gameOptions.platformSpeedRange = [300, 300];
+    gameOptions.robotPercent = 25;
+
+
+    gameOptions.waterPercent = 0;
+  }
+};
+
+const resize = () => {
+  const canvas = document.querySelector('canvas');
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const windowRatio = windowWidth / windowHeight;
+  const gameRatio = config.width / config.height;
+  if (windowRatio < gameRatio) {
+    canvas.style.width = `${windowWidth}px`;
+    canvas.style.height = `${windowWidth / gameRatio}px`;
+  } else {
+    canvas.style.width = `${windowHeight * gameRatio}px`;
+    canvas.style.height = `${windowHeight}px`;
+  }
+};
+
 window.onload = () => {
   resize();
-  window.addEventListener("resize", resize, false);
-}
+  window.addEventListener('resize', resize, false);
+};
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -269,7 +306,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
 
-
   addCity() {
     const rightmostCity = this.getRightmostCity();
     if (rightmostCity < config.width * 2) {
@@ -294,7 +330,7 @@ export default class GameScene extends Phaser.Scene {
     return rightmostCity;
   }
 
-  collectCoin(player, coin) {
+  collectCoin(coin) {
     this.coinSound.play();
 
 
@@ -305,9 +341,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
 
-  touchRobot(player, robot) {
+  touchRobot(player) {
     this.dying = true;
-    this.player.anims.stop();
+    player.anims.stop();
     player.anims.play('explode');
     this.player.setFrame(2);
     this.player.body.setVelocityY(-200);
@@ -315,7 +351,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.removeCollider(this.platformCollider);
   }
 
-  touchWater(player, water) {
+  touchWater() {
     this.dying = true;
     this.player.anims.stop();
 
@@ -337,7 +373,7 @@ export default class GameScene extends Phaser.Scene {
       platform.active = true;
       platform.visible = true;
       this.platformPool.remove(platform);
-      const newRatio = platformWidth / platform.displayWidth;
+
       platform.displayWidth = platformWidth;
       platform.tileScaleX = 1 / platform.scaleX;
     } else {
@@ -413,7 +449,6 @@ export default class GameScene extends Phaser.Scene {
 
           water.setDepth(2);
           this.waterGroup.add(water);
-
         }
       }
     }
@@ -440,7 +475,6 @@ export default class GameScene extends Phaser.Scene {
     if (this.player.y > config.height) {
       this.dismanteledSound.play();
       this.scene.start('SubmitScore', this.score);
-
     }
     this.player.x = gameOptions.playerStartPosition;
 
@@ -494,7 +528,6 @@ export default class GameScene extends Phaser.Scene {
         this.score += 5;
         this.scoreText.setText(`Score: ${this.score}`);
         this.scoreText.setColor('#101821');
-
       }
     }, this);
 
@@ -527,41 +560,3 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 }
-
-const increaseDifficulty = (score, player) => {
-  if (score > 300) {
-    player.setVelocityX(700);
-
-    gameOptions.platformSpeedRange = [500, 900];
-
-    gameOptions.robotPercent = 25 + score / 100;
-    gameOptions.waterPercent = 40 + score / 100;
-  } else if (score > 100) {
-    gameOptions.robotPercent = 25 + score / 100;
-
-
-    gameOptions.waterPercent = 40 + score / 100;
-  } else {
-    gameOptions.platformSpeedRange = [300, 300];
-    gameOptions.robotPercent = 25;
-
-
-    gameOptions.waterPercent = 0;
-  }
-};
-
-
-const resize = () => {
-  const canvas = document.querySelector('canvas');
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-  const windowRatio = windowWidth / windowHeight;
-  const gameRatio = config.width / config.height;
-  if (windowRatio < gameRatio) {
-    canvas.style.width = `${windowWidth}px`;
-    canvas.style.height = `${windowWidth / gameRatio}px`;
-  } else {
-    canvas.style.width = `${windowHeight * gameRatio}px`;
-    canvas.style.height = `${windowHeight}px`;
-  }
-};

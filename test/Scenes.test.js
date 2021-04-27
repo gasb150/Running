@@ -42,7 +42,7 @@ describe('Testing Scenes Constructor', () => {
     expect(typeof TitleScene).toBe('function');
   });
 
-  it('Instruction scene is a function constructor', ()=>{
-    expect(typeof InstructionsScene).toBe('function')
-  })
+  it('Instruction scene is a function constructor', () => {
+    expect(typeof InstructionsScene).toBe('function');
+  });
 });
