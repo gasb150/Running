@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
-import city from './src/assets/images/nightCity.png'
-import greenButton1 from '../assets/images/'
+
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -82,12 +81,12 @@ export default class PreloaderScene extends Phaser.Scene {
 
 
     this.load.image('greenButton1', '../assets/ui/greenButton1.png');
-    this.load.image('greenButton2', './src/assets/ui/greenButton2.png');
-    this.load.image('scoreIcon', './src/assets/ui/score.png');
-    this.load.image('logo', './src/assets/logo.png');
-    this.load.image('noChekedM', './src/assets/ui/disableMusic.png');
-    this.load.image('checkedM', './src/assets/ui/ableMusic.png');
-    this.load.image('noChekedS', './src/assets/ui/disableSounds.png');
+    this.load.image('greenButton2', '../assets/ui/greenButton2.png');
+    this.load.image('scoreIcon', '../assets/ui/score.png');
+    this.load.image('logo', '../assets/logo.png');
+    this.load.image('noChekedM', '../assets/ui/disableMusic.png');
+    this.load.image('checkedM', '../assets/ui/ableMusic.png');
+    this.load.image('noChekedS', '../assets/ui/disableSounds.png');
     this.load.image('checkedS', './src/assets/ui/ableSounds.png');
     this.load.audio('bgMusic', ['./src/assets/Sounds/TownTheme.mp3']);
     this.load.audio('powerOff', ['./src/assets/Sounds/MachinePowerOff.ogg']);
@@ -129,7 +128,7 @@ export default class PreloaderScene extends Phaser.Scene {
         frameHeight: 64,
       });
 
-    this.load.spritesheet('city', city, {
+    this.load.spritesheet('city', './src/assets/images/nightCity.png', {
       frameWidth: 640,
       frameHeight: 320,
     });
