@@ -1,3 +1,4 @@
+require('jest-canvas-mock')
 import config from '../src/Config/config';
 
 
