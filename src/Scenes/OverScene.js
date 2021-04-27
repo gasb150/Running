@@ -17,7 +17,7 @@ export default class OverScene extends Phaser.Scene {
     this.gameButton = new Button(this, config.width / 4, config.height - 80, 'greenButton1', 'greenButton2', 'Re-play', 'Game');
     this.homeButton = new Button(this, config.width / 1.3, config.height - 80, 'greenButton1', 'greenButton2', 'Home', 'Menu');
 
-    async function result() {
+    const result = async () => {
       const response = await api.getInfo();
 
 
@@ -25,7 +25,7 @@ export default class OverScene extends Phaser.Scene {
     }
 
 
-    async function display() {
+    const  display = async () => {
       const response = await result();
 
       response.result.sort((a, b) => b.score - a.score);
