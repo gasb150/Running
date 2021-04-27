@@ -8,12 +8,21 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
     filename: 'project.bundle.js',
   },
 
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: 'url-loader',
+      },
+
       {
         test: [/\.vert$/, /\.frag$/],
         use: 'raw-loader',
