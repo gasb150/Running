@@ -80,22 +80,22 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
 
-    this.load.image('greenButton1', '../assets/ui/greenButton1.png');
+    this.load.image('greenButton1', 'assets/ui/greenButton1.png');
     this.load.image('greenButton2', '../assets/ui/greenButton2.png');
     this.load.image('scoreIcon', '../assets/ui/score.png');
     this.load.image('logo', '../assets/logo.png');
     this.load.image('noChekedM', '../assets/ui/disableMusic.png');
     this.load.image('checkedM', '../assets/ui/ableMusic.png');
     this.load.image('noChekedS', '../assets/ui/disableSounds.png');
-    this.load.image('checkedS', './src/assets/ui/ableSounds.png');
-    this.load.audio('bgMusic', ['./src/assets/Sounds/TownTheme.mp3']);
-    this.load.audio('powerOff', ['./src/assets/Sounds/MachinePowerOff.ogg']);
-    this.load.audio('robot', ['./src/assets/Sounds/robot.mp3']);
-    this.load.audio('burning', ['./src/assets/Sounds/burning.wav']);
-    this.load.audio('jump', ['./src/assets/Sounds/jump.wav']);
-    this.load.audio('coin', ['./src/assets/Sounds/coin.ogg']);
-    this.load.image('platform', './src/assets/images/platform.png');
-    this.load.image('spike', './src/assets/images/Spike.png');
+    this.load.image('checkedS', '../assets/ui/ableSounds.png');
+    this.load.audio('bgMusic', ['../assets/Sounds/TownTheme.mp3']);
+    this.load.audio('powerOff', ['../assets/Sounds/MachinePowerOff.ogg']);
+    this.load.audio('robot', ['../assets/Sounds/robot.mp3']);
+    this.load.audio('burning', ['../assets/Sounds/burning.wav']);
+    this.load.audio('jump', ['../assets/Sounds/jump.wav']);
+    this.load.audio('coin', ['../assets/Sounds/coin.ogg']);
+    this.load.image('platform', '../assets/images/platform.png');
+    this.load.image('spike', '../assets/images/Spike.png');
     // this.load.spritesheet('loadIcon', 'load.png', {
     //   frameWidth: 100,
     //   frameHeight: 110,
