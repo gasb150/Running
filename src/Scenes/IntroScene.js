@@ -8,7 +8,6 @@ export default class IntroScene extends Phaser.Scene {
   }
 
   create() {
-
     this.titleText = this.add.text(config.width / 2 - 200, 100, 'Robot runner', { fontSize: '32px', fill: '#fff' });
     this.pargraphText1 = this.add.text(config.width / 2 - 500, 250, 'An innocent robot is trying to escape from his "home."', { fontSize: '26px', fill: '#fff' });
     this.pargraphText2 = this.add.text(config.width / 2 - 500, 280, 'His creator is evil engineering and will use him to conquest the world.', { fontSize: '26px', fill: '#fff' });
