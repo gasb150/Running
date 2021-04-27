@@ -1,5 +1,5 @@
 // import completeGame from './module/game'
-import './style.css';
+import '../style.css';
 // completeGame()
 
 import Phaser from 'phaser';
