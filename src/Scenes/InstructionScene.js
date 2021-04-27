@@ -4,7 +4,6 @@ import Button from '../Objects/Button';
 import clear from '../module/clear';
 
 
-
 export default class InstructionsScene extends Phaser.Scene {
   constructor() {
     super('Instructions');
@@ -12,27 +11,27 @@ export default class InstructionsScene extends Phaser.Scene {
 
 
   create() {
- 
 
-    this.text = this.add.text(300, 100, 'Instruction', { fontSize: 40 });
+    this.homeButton = new Button(this, config.width / 1.3, config.height/5, 'greenButton1', 'greenButton2', 'Home', 'Menu');
 
-    this.text = this.add.text(100, 200, 'Jump', { fontSize: 30 })
+    this.text = this.add.text(config.width/4, config.height/6, 'Instruction', { fontSize: 40 });
 
-    this.text = this.add.text(50, 250, 'To jump you can use ENTER keyboard or click, if try again and you will jump twice', { fontSize: 20 })
+    this.text = this.add.text(config.width/10, config.height/3, 'Jump', { fontSize: 30 });
 
-
-    this.text = this.add.text(100, 310, 'Collect coins', { fontSize: 30 })
-
-    this.text= this.add.text(50, 360, 'Collect many coins as posible', { fontSize: 20 })
+    this.text = this.add.text(config.width/20, config.height/2.5, 'To jump you can use ENTER keyboard or click, if try again and you will jump twice', { fontSize: 20 });
 
 
-    this.text = this.add.text(100, 420, 'Evade other robots and spikes', { fontSize: 30 })
+    this.text = this.add.text(config.width/10, config.height/2, 'Collect coins', { fontSize: 30 });
 
-    this.text = this.add.text(50, 470, 'Collect many coins as posible', { fontSize: 20 })
+    this.text = this.add.text(config.width/20, config.height/1.75, 'Collect many coins as posible', { fontSize: 20 });
 
-    this.text = this.add.text(100, 530, 'Score', { fontSize: 30 })
 
-    this.text= this.add.text(50, 580, 'The score will increese wile you keep runnin, collect coins, or evade obstacles', { fontSize: 20 })
-  
+    this.text = this.add.text(config.width/10, config.height/1.5, 'Evade other robots and spikes', { fontSize: 30 });
+
+    this.text = this.add.text(config.width/20, config.height/1.3, 'Collect many coins as posible', { fontSize: 20 });
+
+    this.text = this.add.text(config.width/10, config.height/1.17, 'Score', { fontSize: 30 });
+
+    this.text = this.add.text(config.width/20, config.height/1.08, 'The score will increese wile you keep runnin, collect coins, or evade obstacles', { fontSize: 20 });
   }
 }

@@ -3,21 +3,20 @@ import '../style.css';
 import '../reset.css';
 
 
-
 import Phaser from 'phaser';
 import config from './Config/config';
-import GameScene from './Scenes/GameScene';
-import BootScene from './Scenes/BootScene';
-import PreloaderScene from './Scenes/PreloaderScene';
-import TitleScene from './Scenes/TitleScene';
-import OptionsScene from './Scenes/OptionsScene';
-import CreditsScene from './Scenes/CreditsScene';
-import Model from './Model';
-import SubmitScore from './Scenes/SubmitScore';
-import MenuScene from './Scenes/MenuScene';
-import OverScene from './Scenes/OverScene';
+import GameScene from './Scenes/GameScene'; //
+import BootScene from './Scenes/BootScene'; //
+import PreloaderScene from './Scenes/PreloaderScene'; //
+import TitleScene from './Scenes/TitleScene'; //
+import OptionsScene from './Scenes/OptionsScene'; //
+import CreditsScene from './Scenes/CreditsScene'; //
+import Model from './Model'; //
+import SubmitScore from './Scenes/SubmitScore'; //
+import MenuScene from './Scenes/MenuScene'; //
+import OverScene from './Scenes/OverScene'; //
 import IntroScene from './Scenes/IntroScene';
-import Instructions from './Scenes/InstructionScene'
+import Instructions from './Scenes/InstructionScene';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -33,7 +32,7 @@ class Game extends Phaser.Game {
     this.scene.add('Intro', IntroScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
-    this.scene.add('Instructions', Instructions)
+    this.scene.add('Instructions', Instructions);
     this.scene.add('SubmitScore', SubmitScore);
 
     this.scene.add('Game', GameScene);
