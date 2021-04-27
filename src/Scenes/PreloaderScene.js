@@ -80,7 +80,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
 
-    this.load.image('greenButton1', 'assets/ui/greenButton1.png');
+    this.load.image('greenButton1', 'src/assets/ui/greenButton1.png');
     this.load.image('greenButton2', '../assets/ui/greenButton2.png');
     this.load.image('scoreIcon', '../assets/ui/score.png');
     this.load.image('logo', '../assets/logo.png');
