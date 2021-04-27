@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import coin from '/src/assets/images/coin.png'
+
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -14,7 +14,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.add.image(400, 200, 'logo');
 
 
-    console.log(coin.url)
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -105,33 +104,33 @@ export default class PreloaderScene extends Phaser.Scene {
     // });
 
 
-    this.load.spritesheet('explode', './src/assets/images/explode.png', {
+    this.load.spritesheet('explode', '/src/assets/images/explode.png', {
       frameWidth: 341.33,
       frameHeight: 341.33,
     });
 
-    this.load.spritesheet('player', './src/assets/images/player.png', {
+    this.load.spritesheet('player', '/src/assets/images/player.png', {
       frameWidth: 58.75,
       frameHeight: 57,
     });
 
-    this.load.spritesheet('playerJump', './src/assets/images/player.png', {
+    this.load.spritesheet('playerJump', '/src/assets/images/player.png', {
       frameWidth: 58.75,
       frameHeight: 62.5,
     });
 
-    this.load.spritesheet('coin', './src/assets/images/coin.png', {
+    this.load.spritesheet('coin', '/src/assets/images/coin.png', {
       frameWidth: 20,
       frameHeight: 20,
     });
 
-    this.load.spritesheet('robot', './src/assets/images/robotEnemy.png',
+    this.load.spritesheet('robot', '/src/assets/images/robotEnemy.png',
       {
         frameWidth: 64,
         frameHeight: 64,
       });
 
-    this.load.spritesheet('city', './src/assets/images/nightCity.png', {
+    this.load.spritesheet('city', '/src/assets/images/nightCity.png', {
       frameWidth: 640,
       frameHeight: 320,
     });
