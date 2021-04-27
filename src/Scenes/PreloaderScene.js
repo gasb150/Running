@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-
+import city from './src/assets/images/nightCity.png'
+import greenButton1 from '../assets/images/'
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -80,7 +81,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
 
-    this.load.image('greenButton1', './src/assets/ui/greenButton1.png');
+    this.load.image('greenButton1', '../assets/ui/greenButton1.png');
     this.load.image('greenButton2', './src/assets/ui/greenButton2.png');
     this.load.image('scoreIcon', './src/assets/ui/score.png');
     this.load.image('logo', './src/assets/logo.png');
@@ -128,7 +129,7 @@ export default class PreloaderScene extends Phaser.Scene {
         frameHeight: 64,
       });
 
-    this.load.spritesheet('city', './src/assets/images/nightCity.png', {
+    this.load.spritesheet('city', city, {
       frameWidth: 640,
       frameHeight: 320,
     });
