@@ -9,23 +9,29 @@ const fetch = require('node-fetch');
 const leaderboard = (() => {
   const addScore = async (name, score) => {
     const body = JSON.stringify({ user: name, score });
-    const response = await fetch(url, {
+
+    const settings = {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
       body,
-    });
+    };
 
+    const response = await fetch(url, settings);
     return response;
   };
 
 
   const getInfo = async () => {
-    const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
+    try {
+      const data = await fetch(url, { mode: 'cors' }).then((response) => response.json());
 
-    return data;
+      return data;
+    } catch (error) {
+      throw Error('Not data found');
+    }
   };
 
   return {

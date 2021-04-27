@@ -22,10 +22,10 @@ export default class OverScene extends Phaser.Scene {
 
 
       return response;
-    }
+    };
 
 
-    const  display = async () => {
+    const display = async () => {
       const response = await result();
 
       response.result.sort((a, b) => b.score - a.score);
@@ -66,7 +66,7 @@ export default class OverScene extends Phaser.Scene {
       score.style.columnGap = '50px';
       score.style.top = '200px';
       score.style.left = '200px';
-    }
+    };
     display();
   }
 }

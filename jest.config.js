@@ -1,3 +1,3 @@
 module.exports = {
-    setupFilesAfterEnv: ['jest-canvas-mock'],
-  };
+  setupFilesAfterEnv: ['jest-canvas-mock'],
+};
