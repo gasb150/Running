@@ -1,10 +1,10 @@
 # Robot Runner
 
-This is a platform game develope using Phaser 3 library. the carachter is a robot which has to excapet from the factory it was created, jumping trought platforms with different width and positionated in different heighs, collectio coins, and evading robots and spikes.
+This is a platform game developed using Phaser 3 library. the character is a robot that has to escape from the factory it was created, jumping through platforms with different widths and positioned in different heights, collect coins, and evading robots and spikes.
 
-The score is incresed, for each plataform  and robot completetly hidded in the right and for each coin collected. Once the score pass some limits the difficulty will be incresed, and spikes are going to apper.
+The score is increased, for each platform and robot completely hidden in the right and for each coin collected. Once the score passes some limits the difficulty will be increased, and spikes are going to appear.
 
-You can submit your player name, and once the player dye, your score will be submited to leaderboard api.
+You can submit your player name, and once the player dye, your score will be submitted to leaderboard API.
 
 You will see your position if your score is higher than the player in the #10 position.
 
@@ -14,8 +14,8 @@ You will see your position if your score is higher than the player in the #10 po
 
 ## How to play
 
-TO play you can use, click or space keyboard.
- With a max 2, your objetive is collec as many coins posible without fall.
+TO play you can use, click, or the space key.
+ With a max 2, your goal is to collect as many coins as possible without fall.
 
  ## Assets
 
@@ -104,7 +104,7 @@ To get a local copy of this project running follow these simple steps.
 
 - Clone this repository
  > `git clone <repo>`
-- Navigate to the Repo Folder
+
 - To set Webpack and the dependencies run the command
 > `npm install`
 - Use your favorite browser to open the index.html file (located at the dist page)
@@ -113,7 +113,7 @@ To get a local copy of this project running follow these simple steps.
 
 > `yarn start`
 
-- Open the following path using your favorite browser.
+- Open the following path in your browser.
 
 > `http://localhost:8000/`
 
